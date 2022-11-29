@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
 
     public Transform[] itemSpawnPoints;
     public GameObject[] itemModelPrefabs;
@@ -16,9 +17,15 @@ public class GameManager : MonoBehaviour
     // whether an Item has been placed if the GameObject is not null
     private Dictionary<Transform, GameObject> m_SpawnPointStates = new();
 
+
+    public GameObject[] GetItems()
+    {
+        return m_SpawnPointStates.Values.ToArray();
+    }
+
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Start()

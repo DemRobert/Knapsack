@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,27 +19,26 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementInputAction = _playerControls.Player.Move;
         _movementInputAction.Enable();
+        _movementInputAction.performed += MovePerformed;
+        _movementInputAction.canceled += MovePerformed;
     }
+
+    private void MovePerformed(InputAction.CallbackContext context)
+    {
+
+        _movementDirection = _movementInputAction.ReadValue<Vector2>();        
+        RotateToWalkingDirection();
+    }
+
     private void OnDisable()
     {
         _movementInputAction.Disable();
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        _movementDirection = _movementInputAction.ReadValue<Vector2>();        
-    }
 
     private void FixedUpdate()
     {
-        Move();
-        RotateToWalkingDirection();
-    }
-
-    private void Move()
-    {
         _playerRigidbody.velocity = new Vector3(_movementDirection.x * _movementSpeed, _playerRigidbody.velocity.y, _movementDirection.y * _movementSpeed);
+        //RotateToWalkingDirection();
     }
 
     private void RotateToWalkingDirection()
