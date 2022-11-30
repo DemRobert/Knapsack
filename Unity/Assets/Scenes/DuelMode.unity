@@ -651,6 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1821135680}
   - component: {fileID: 1821135681}
+  - component: {fileID: 1821135682}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -688,5 +689,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
+  ConsiderPrioritySpawnPoints: 1
+  CountOfItemsToSpawn: 5
   SpawnPoints:
   - {fileID: 1132631421}
+  PrioritySpawnPoints: []
+  signPrefab: {fileID: 0}
+  signParentObject: {fileID: 0}
+--- !u!114 &1821135682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821135678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ConsiderPrioritySpawnPoints: 0
+  CountOfItemsToSpawn: 5
+  SpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  PrioritySpawnPoints: []
+  signPrefab: {fileID: 1973244070696727318, guid: 3b9140cbd94783b4297b13b721517655, type: 3}
+  signParentObject: {fileID: 0}

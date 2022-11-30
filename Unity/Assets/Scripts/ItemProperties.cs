@@ -5,10 +5,9 @@ public class ItemProperties : MonoBehaviour
     public int value = 1;
     public int weight = 1;
 
-    public void Set(GameObject other)
+    public void Set(Item item)
     {
-        ItemProperties otherProps = other.GetComponent<ItemProperties>();
-        value = otherProps.value;
-        weight = otherProps.weight;
+        value = item.Value;
+        weight = item.Weight;
     }
 }
