@@ -14,7 +14,8 @@ public class ItemSpawner : MonoBehaviour
     public int CountOfItemsToSpawn = 5;
 
     // A List of all possible SpawnPoints
-    // The SpawnPoints
+    // The SpawnPoints will be determined automatically by their Tag. If you choose to
+    // set some of the Spawn Points manually, they will be kept and not be overwritten
     public List<GameObject> SpawnPoints = new();
     // A List of SpawnPoints, which are preferred for spawning
     // Items (Items will spawn first at these SpawnPoints)
