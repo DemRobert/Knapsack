@@ -42,7 +42,6 @@ public class ItemSpawner : MonoBehaviour
 
     private void CollectSpawnPoints()
     {
-        // Assume there is only 1 Object with this Tag
         var itemSpawnPoints = GameObject.FindGameObjectsWithTag("ItemSpawnPoint");
 
         for (var i = 0; i < itemSpawnPoints.Length; ++i)
