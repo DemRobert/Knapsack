@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8960950123377684913}
   m_Layer: 0
   m_Name: Sign
-  m_TagString: Untagged
+  m_TagString: Sign
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 3174680943557876565}
   weightText: {fileID: 7974250758444065023}
+  Id: -1
 --- !u!1 &3392203118895529299
 GameObject:
   m_ObjectHideFlags: 0

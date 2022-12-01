@@ -1,12 +1,13 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
-    private void Awake()
+
+    public EventSystem EventSystem;
+
+	private void Awake()
     {
         Instance = this;
     }

@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -21,10 +22,20 @@ public class ItemSpawner : MonoBehaviour
     // Items (Items will spawn first at these SpawnPoints)
     public List<GameObject> PrioritySpawnPoints = new();
 
-    public GameObject signPrefab;
-    public GameObject signParentObject;
+    public GameObject SignPrefab;
+	public Transform SignParentObject;
 
-    private List<GameObject> m_UsedSpawnPoints = new();
+	private List<GameObject> m_UsedSpawnPoints = new();
+
+    public Sprite AddItemImage;
+    public Sprite RemoveItemImage;
+
+    private static int s_CurId = 0;
+    private Queue<int> m_FreedIds = new();
+
+    public GameObject AddItemMenu;
+    private static GameObject s_ActiveAddItemMenu;
+    private static Transform s_CurrentAddItemMenuSpawnPoint;
 
     private void Awake()
     {
@@ -35,8 +46,9 @@ public class ItemSpawner : MonoBehaviour
     private void Start()
     {
         CollectSpawnPoints();
+        InitializeSpawnPoints();
 
-        SpawnItems();
+		SpawnItems();
         SpawnSigns();
     }
 
@@ -58,6 +70,16 @@ public class ItemSpawner : MonoBehaviour
                 SpawnPoints.Add(itemSpawnPoints[i]);
             }
         }
+    }
+
+    private void InitializeSpawnPoints()
+    {
+        foreach (var spawnPoint in SpawnPoints)
+        {
+            var canvas = spawnPoint.transform.Find("Canvas");
+			canvas.Find("Image").GetComponent<Image>().sprite = AddItemImage;
+            canvas.GetComponent<Canvas>().worldCamera = Camera.main;
+		}
     }
 
     private void SpawnItems()
@@ -84,16 +106,50 @@ public class ItemSpawner : MonoBehaviour
 
         for (var i = 0; i < CountOfItemsToSpawn; ++i)
         {
-            var curItemTemplate = GetRandomItem();
-            var usedSpawnPoint = spawnPoints[i];
+            SpawnItem(spawnPoints[i]);
+		}
+    }
 
-            var curItem = Instantiate(curItemTemplate.Model, usedSpawnPoint.transform);
-            m_UsedSpawnPoints.Add(usedSpawnPoint);
+    private void SpawnItem(GameObject spawnPoint, int value, int weight)
+    {
+		var curItemTemplate = GetRandomItem();
+		var itemParent = spawnPoint.transform.Find("Item");
 
-            var itemProperties = curItem.GetComponent<ItemProperties>();
+		var curItem = Instantiate(curItemTemplate.Model, itemParent);
+		m_UsedSpawnPoints.Add(spawnPoint);
+
+        var itemProperties = curItem.GetComponent<ItemProperties>();
+        if (value == -1 || weight == -1)
+        {
             itemProperties.Set(curItemTemplate);
         }
-    }
+        else
+        {
+            itemProperties.value = value;
+            itemProperties.weight = weight;
+        }
+
+		// If an Item has spawned on the current SpawnPoint, set its Image to an X instead of a +
+		var imageComponent = spawnPoint.transform.Find("Canvas").Find("Image").GetComponent<Image>();
+		imageComponent.sprite = RemoveItemImage;
+
+		itemProperties.Id = GetNextId();
+	}
+
+	private void SpawnItem(GameObject spawnPoint)
+    {
+        SpawnItem(spawnPoint, -1, -1);
+	}
+
+	private int GetNextId()
+    {
+        if (m_FreedIds.Count > 0)
+        {
+            return m_FreedIds.Dequeue();
+        }
+
+        return s_CurId++;
+	}
 
     private Item GetRandomItem()
     {
@@ -108,28 +164,99 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnSigns()
     {
-        // How the Sign has to be translated from the Position of the SpawnPoint
-        var spawnLocationSignOffsetY = new Vector3(0.0f, -0.014f, 0.0f);
-
         foreach (var curSpawnPoint in m_UsedSpawnPoints)
         {
-            var spawnPointPos = curSpawnPoint.transform.position;
+            SpawnSign(curSpawnPoint);
+		}
+    }
 
-            // The spawned Item is the Child of the current SpawnPoint
-            // We assume it only has this 1 Child
-            var spawnedItem = curSpawnPoint.transform.GetChild(0);
+    private void SpawnSign(GameObject spawnPoint)
+    {
+		// How the Sign has to be translated from the Position of the SpawnPoint
+		var spawnLocationSignOffsetY = new Vector3(0.0f, -0.014f, 0.0f);
 
-            // 'right' is the red Arrow in the Editor
-            var curSpawnLocationSignOffset = spawnLocationSignOffsetY + spawnedItem.right*0.2f;
-            var signPos = spawnPointPos + curSpawnLocationSignOffset;
+		// The spawned Item is the Child of the current SpawnPoint
+		// We assume it only has this 1 Child
+		var spawnedItem = spawnPoint.transform.Find("Item").GetChild(0);
 
-            var sign = Instantiate(signPrefab, signPos, curSpawnPoint.transform.rotation, signParentObject.transform);
+		var spawnPointPos = spawnPoint.transform.position;
+		// 'right' is the red Arrow in the Editor
+		var curSpawnLocationSignOffset = spawnLocationSignOffsetY + spawnedItem.right * 0.2f;
+		var signPos = spawnPointPos + curSpawnLocationSignOffset;
 
-            var itemProperties = spawnedItem.GetComponent<ItemProperties>();
-            var signControllerScript = sign.GetComponent<SignController>();
+        Debug.Log(SignParentObject == null);
+		var sign = Instantiate(SignPrefab, signPos, spawnPoint.transform.rotation, SignParentObject);
 
-            signControllerScript.SetWeight(itemProperties.weight);
-            signControllerScript.SetValue(itemProperties.value);
+		var itemProperties = spawnedItem.GetComponent<ItemProperties>();
+		var signControllerScript = sign.GetComponent<SignController>();
+
+		signControllerScript.SetWeight(itemProperties.weight);
+		signControllerScript.SetValue(itemProperties.value);
+
+		signControllerScript.Id = itemProperties.Id;
+	}
+
+    public void RemoveItem(Transform spawnPoint)
+    {
+        var itemParent = spawnPoint.Find("Item");
+        // Only has 1 Child -> the Item(model)
+        var item = itemParent.GetChild(0).gameObject;
+
+        m_FreedIds.Enqueue(item.GetComponent<ItemProperties>().Id);
+
+		// Remove and Destroy the associated Sign
+		var associatedSign = FindAssociatedSign(item);
+        if (associatedSign != null)
+        {
+            Destroy(associatedSign);
         }
+
+		m_UsedSpawnPoints.Remove(item);
+		Destroy(item);
+	}
+
+	public void AddItem(Transform spawnPoint)
+    {
+        if (s_ActiveAddItemMenu == null)
+        {
+            s_ActiveAddItemMenu = Instantiate(AddItemMenu);
+            s_CurrentAddItemMenuSpawnPoint = spawnPoint;
+		}
+    }
+
+    public void OnAddItemMenuCancelButtonPressed()
+    {
+        Destroy(s_ActiveAddItemMenu);
+    }
+
+	public void OnAddItemMenuAddButtonPressed()
+	{
+        var menuCanvas = s_ActiveAddItemMenu.transform.Find("Canvas");
+        var inputFieldValue = menuCanvas.Find("InputField_Value").GetComponent<TMP_InputField>().text;
+        var inputFieldWeight = menuCanvas.Find("InputField_Weight").GetComponent<TMP_InputField>().text;
+
+        // TODO: Check if the Entries of the InputFields are valid
+        SpawnItem(s_CurrentAddItemMenuSpawnPoint.gameObject, int.Parse(inputFieldValue), int.Parse(inputFieldWeight));
+        SpawnSign(s_CurrentAddItemMenuSpawnPoint.gameObject);
+
+		var imageComponent = s_CurrentAddItemMenuSpawnPoint.Find("Canvas").Find("Image").GetComponent<Image>();
+        imageComponent.sprite = RemoveItemImage;
+
+		Destroy(s_ActiveAddItemMenu);
+	}
+
+	private GameObject FindAssociatedSign(GameObject item)
+    {
+        var signs = GameObject.FindGameObjectsWithTag("Sign");
+        foreach (var sign in signs)
+        {
+            if (item.GetComponent<ItemProperties>().Id ==
+				sign.GetComponent<SignController>().Id)
+            {
+                return sign;
+            }
+        }
+
+        return null;
     }
 }
