@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Kanne_Test
+  m_Name: Kanne3_Test
   m_EditorClassIdentifier: 
-  Name: Kanne
+  Name: Kanne3
   Model: {fileID: 2022277838945903707, guid: e1a0223f86a405d4f80f0b51b938b0fe, type: 3}
-  Value: 2
-  Weight: 5
+  Value: 4
+  Weight: 9
