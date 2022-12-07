@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
+  m_Name: JackDaniels
+  m_EditorClassIdentifier: 
+  Name: Jack Daniels (0,7L)
+  Model: {fileID: 5939061931864445519, guid: 8f8715a60d9f8f84a804bca81e526ca4, type: 3}
+  Value: 20
+  Weight: 8
