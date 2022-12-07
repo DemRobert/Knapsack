@@ -8,6 +8,7 @@ TagManager:
   - ItemSpawnPointImage
   - Sign
   - KnapsackCapacity
+  - Item
   layers:
   - Default
   - TransparentFX

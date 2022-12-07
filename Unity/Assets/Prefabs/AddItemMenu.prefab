@@ -175,8 +175,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1677676642614044864, guid: bba912a20d75fef4e84b80bb183c29f6, type: 3}
-        m_TargetAssemblyTypeName: ItemSpawner, Assembly-CSharp
+      - m_Target: {fileID: 19613361127530270}
+        m_TargetAssemblyTypeName: AddItemEventHandler, Assembly-CSharp
         m_MethodName: OnAddItemMenuCancelButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -707,6 +707,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378204137555912205}
+  - component: {fileID: 19613361127530270}
   m_Layer: 0
   m_Name: AddItemMenu
   m_TagString: Untagged
@@ -730,6 +731,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19613361127530270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892154541541819130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d64c594e48cf24583383b39c93df7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4075770063863589650
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,8 +1000,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1677676642614044864, guid: bba912a20d75fef4e84b80bb183c29f6, type: 3}
-        m_TargetAssemblyTypeName: ItemSpawner, Assembly-CSharp
+      - m_Target: {fileID: 19613361127530270}
+        m_TargetAssemblyTypeName: AddItemEventHandler, Assembly-CSharp
         m_MethodName: OnAddItemMenuAddButtonPressed
         m_Mode: 1
         m_Arguments:

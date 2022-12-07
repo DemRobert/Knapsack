@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ItemSpawner : MonoBehaviour
 {
     public static ItemSpawner Instance;
 
-    public List<Item> Items = new();
+    public List<Item> ItemPrefabs;
+    private readonly List<GameObject> m_Items = new();
 
     // If set to false, the PrioritySpawnPoints will be ignored and
     // Items will just spawn at the Spawn Points of SpawnPoints in order
@@ -25,13 +27,13 @@ public class ItemSpawner : MonoBehaviour
     public GameObject SignPrefab;
 	public Transform SignParentObject;
 
-	private List<GameObject> m_UsedSpawnPoints = new();
+	private readonly List<GameObject> m_UsedSpawnPoints = new();
 
     public Sprite AddItemImage;
     public Sprite RemoveItemImage;
 
     private static int s_CurId = 0;
-    private Queue<int> m_FreedIds = new();
+    private readonly Queue<int> m_FreedIds = new();
 
     public GameObject AddItemMenu;
     private static GameObject s_ActiveAddItemMenu;
@@ -40,6 +42,11 @@ public class ItemSpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public List<GameObject> GetItems()
+    {
+        return m_Items;
     }
 
     // Start is called before the first frame update
@@ -117,8 +124,11 @@ public class ItemSpawner : MonoBehaviour
 
 		var curItem = Instantiate(curItemTemplate.Model, itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
+		curItem.tag = "Item";
 
-        var itemProperties = curItem.GetComponent<ItemProperties>();
+		m_Items.Add(curItem);
+
+		var itemProperties = curItem.GetComponent<ItemProperties>();
         if (value == -1 || weight == -1)
         {
             itemProperties.Set(curItemTemplate);
@@ -157,9 +167,9 @@ public class ItemSpawner : MonoBehaviour
         // omit the actual Length of the 'itemModelPrefabs' Array because it starts with 0.
         // To now have a fair Distribution of all Items, let the last ItemModel have
         // a Range of 0 to 0.97 (0.97 will still be Floored to 0)
-        var indexItem = (int)Random.Range(0.0f, Items.Count - 0.03f);
+        var indexItem = (int)Random.Range(0.0f, ItemPrefabs.Count - 0.03f);
 
-        return Items[indexItem];
+        return ItemPrefabs[indexItem];
     }
 
     private void SpawnSigns()
@@ -185,6 +195,7 @@ public class ItemSpawner : MonoBehaviour
 		var signPos = spawnPointPos + curSpawnLocationSignOffset;
 
         //Debug.Log(SignParentObject == null);
+        // Spawnt zur Runtime nicht im Parent??
 		var sign = Instantiate(SignPrefab, signPos, spawnPoint.transform.rotation, SignParentObject);
 
 		var itemProperties = spawnedItem.GetComponent<ItemProperties>();
@@ -201,8 +212,9 @@ public class ItemSpawner : MonoBehaviour
         var itemParent = spawnPoint.Find("Item");
         // Only has 1 Child -> the Item(model)
         var item = itemParent.GetChild(0).gameObject;
+		m_Items.Remove(item);
 
-        m_FreedIds.Enqueue(item.GetComponent<ItemProperties>().Id);
+		m_FreedIds.Enqueue(item.GetComponent<ItemProperties>().Id);
 
 		// Remove and Destroy the associated Sign
 		var associatedSign = FindAssociatedSign(item);
