@@ -184,7 +184,7 @@ public class ItemSpawner : MonoBehaviour
 		var curSpawnLocationSignOffset = spawnLocationSignOffsetY + spawnedItem.right * 0.2f;
 		var signPos = spawnPointPos + curSpawnLocationSignOffset;
 
-        Debug.Log(SignParentObject == null);
+        //Debug.Log(SignParentObject == null);
 		var sign = Instantiate(SignPrefab, signPos, spawnPoint.transform.rotation, SignParentObject);
 
 		var itemProperties = spawnedItem.GetComponent<ItemProperties>();

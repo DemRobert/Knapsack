@@ -3,9 +3,19 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+	public enum GameModes
+    {
+        UNDEFINED,
+
+        LEARNING,
+        PRACTICE,
+        DUEL
+    }
+
+	public static GameManager Instance;
 
     public EventSystem EventSystem;
+    public GameModes GameMode; 
 
 	private void Awake()
     {
