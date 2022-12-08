@@ -17,6 +17,8 @@ public class PlayerHUDController : MonoBehaviour
 	private bool m_IsEnteringNumber;
 	private string m_CurrentlyTypedString = "";
 
+	private Inventory m_PlayerInventory;
+
 	private void Awake()
 	{
         Instance = this;
@@ -25,6 +27,8 @@ public class PlayerHUDController : MonoBehaviour
 	private void Start()
 	{
 		SetKnapsackCapacity(1);
+
+		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
 	}
 
 	private void Update()
@@ -54,8 +58,7 @@ public class PlayerHUDController : MonoBehaviour
 					switch (imageComponent.sprite.name)
 					{
 						case "RemoveItem":
-							ItemSpawner.Instance.RemoveItem(spawnPoint);
-							imageComponent.sprite = ItemSpawner.Instance.AddItemImage;
+							ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
 
 							break;
 
@@ -78,6 +81,14 @@ public class PlayerHUDController : MonoBehaviour
 
 					SetKnapsackCapacityText("ENTER NUMBER");
 				}
+				else if (raycastGameObject.CompareTag("ItemInHUD"))
+				{
+					if (ItemSpawner.Instance.IsSelectingHUDItem &&
+						Input.GetMouseButtonDown(0))
+					{
+						ItemSpawner.Instance.OnHUDItemSelected(raycastGameObject.transform.parent.GetComponent<ItemInHUDController>().HUDItem);
+					}
+				}
 			}
 		}
 
@@ -98,10 +109,20 @@ public class PlayerHUDController : MonoBehaviour
 			// "Reoutline" the currently hovered Item (if one is)
 			if (raycastSceneHit.collider.CompareTag("Item"))
 			{
-				var colliderGameObject = raycastSceneHit.collider;
+				var colliderGameObject = raycastSceneHit.collider.gameObject;
 				if (colliderGameObject.TryGetComponent<Outline>(out var outline))
 				{
 					outline.OutlineColor = Color.white;
+				}
+
+				if (Input.GetMouseButtonDown(0))
+				{
+					var hitObjectGameObject = raycastSceneHit.collider.gameObject;
+
+					var itemPrefabScript = colliderGameObject.GetComponent<ItemPrefab>();
+					m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, itemPrefabScript.GetComponent<ItemProperties>(), itemPrefabScript.ObjectAsSprite));
+
+					ItemSpawner.Instance.RemoveItem(hitObjectGameObject);
 				}
 			}
 		}

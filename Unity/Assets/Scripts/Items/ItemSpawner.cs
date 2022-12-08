@@ -36,8 +36,14 @@ public class ItemSpawner : MonoBehaviour
     private readonly Queue<int> m_FreedIds = new();
 
     public GameObject AddItemMenu;
+    public GameObject AddItemSelectMenu;
+
     private static GameObject s_ActiveAddItemMenu;
+    private static GameObject s_ActiveAddItemSelectMenu;
     private static Transform s_CurrentAddItemMenuSpawnPoint;
+
+    private GameObject m_Player;
+	[HideInInspector] public bool IsSelectingHUDItem;
 
     private void Awake()
     {
@@ -52,7 +58,9 @@ public class ItemSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        CollectSpawnPoints();
+        m_Player = GameObject.FindGameObjectsWithTag("Player")[0];
+
+		CollectSpawnPoints();
         InitializeSpawnPoints();
 
 		SpawnItems();
@@ -117,38 +125,40 @@ public class ItemSpawner : MonoBehaviour
 		}
     }
 
-    private void SpawnItem(GameObject spawnPoint, int value, int weight)
+	private void SpawnItem(GameObject spawnPoint, int value, int weight, GameObject prefab)
     {
-		var curItemTemplate = GetRandomItem();
 		var itemParent = spawnPoint.transform.Find("Item");
 
-		var curItem = Instantiate(curItemTemplate.Model, itemParent);
+		var curItem = Instantiate(prefab, itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
 		m_Items.Add(curItem);
 
 		var itemProperties = curItem.GetComponent<ItemProperties>();
-        if (value == -1 || weight == -1)
-        {
-            itemProperties.Set(curItemTemplate);
-        }
-        else
-        {
-            itemProperties.value = value;
-            itemProperties.weight = weight;
-        }
+		itemProperties.value = value;
+		itemProperties.weight = weight;
 
 		// If an Item has spawned on the current SpawnPoint, set its Image to an X instead of a +
 		var imageComponent = spawnPoint.transform.Find("Canvas").Find("Image").GetComponent<Image>();
 		imageComponent.sprite = RemoveItemImage;
 
+        var itemPrefab = curItem.GetComponent<ItemPrefab>();
+        itemPrefab.SetPrefab(prefab);
+
 		itemProperties.Id = GetNextId();
 	}
 
 	private void SpawnItem(GameObject spawnPoint)
-    {
-        SpawnItem(spawnPoint, -1, -1);
+	{
+		var randomItemTemplate = GetRandomItem();
+		SpawnItem(spawnPoint, randomItemTemplate.Value, randomItemTemplate.Weight, randomItemTemplate.Model);
+	}
+
+	private void SpawnItem(GameObject spawnPoint, int value, int weight)
+	{
+		var randomItemTemplate = GetRandomItem();
+		SpawnItem(spawnPoint, value, weight, randomItemTemplate.Model);
 	}
 
 	private int GetNextId()
@@ -207,13 +217,16 @@ public class ItemSpawner : MonoBehaviour
 		signControllerScript.Id = itemProperties.Id;
 	}
 
-    public void RemoveItem(Transform spawnPoint)
+    private Transform GetSpawnPoint(GameObject item)
     {
-        var itemParent = spawnPoint.Find("Item");
-        // Only has 1 Child -> the Item(model)
-        var item = itemParent.GetChild(0).gameObject;
-		m_Items.Remove(item);
+        return item.transform.parent.parent;
+    }
 
+    public void RemoveItem(GameObject item)
+    {
+        var itemParent = item.transform.parent;
+        // Only has 1 Child -> the Item(model)
+		m_Items.Remove(item);
 		m_FreedIds.Enqueue(item.GetComponent<ItemProperties>().Id);
 
 		// Remove and Destroy the associated Sign
@@ -225,18 +238,63 @@ public class ItemSpawner : MonoBehaviour
 
 		m_UsedSpawnPoints.Remove(item);
 		Destroy(item);
+
+        var spawnPoint = GetSpawnPoint(item);
+        var imageObj = spawnPoint.Find("Canvas").GetChild(0).gameObject;
+		imageObj.GetComponent<Image>().sprite = AddItemImage;
 	}
 
 	public void AddItem(Transform spawnPoint)
     {
-        if (s_ActiveAddItemMenu == null)
+        var inventory = m_Player.GetComponent<Inventory>();
+        if (inventory.GetItems().Count == 0)
         {
-            s_ActiveAddItemMenu = Instantiate(AddItemMenu);
-            s_CurrentAddItemMenuSpawnPoint = spawnPoint;
+			if (s_ActiveAddItemMenu == null)
+			{
+				s_ActiveAddItemMenu = Instantiate(AddItemMenu);
+				s_CurrentAddItemMenuSpawnPoint = spawnPoint;
+			}
 		}
-    }
+        else
+        {
+            if (s_ActiveAddItemSelectMenu == null)
+            {
+				s_ActiveAddItemSelectMenu = Instantiate(AddItemSelectMenu);
+				s_CurrentAddItemMenuSpawnPoint = spawnPoint;
+			}
+        }
+	}
 
-    public void OnAddItemMenuCancelButtonPressed()
+	public void OnAddNewItemButtonPressed()
+	{
+		if (s_ActiveAddItemMenu == null)
+		{
+			s_ActiveAddItemMenu = Instantiate(AddItemMenu);
+		}
+
+        Destroy(s_ActiveAddItemSelectMenu);
+        s_ActiveAddItemSelectMenu = null;
+	}
+
+	public void OnAddInventoryItemButtonPressed()
+	{
+		Destroy(s_ActiveAddItemSelectMenu);
+		s_ActiveAddItemSelectMenu = null;
+
+        IsSelectingHUDItem = true;
+	}
+
+    public void OnHUDItemSelected(HUDItem hudItem)
+    {
+        SpawnItem(s_CurrentAddItemMenuSpawnPoint.gameObject, hudItem.ItemProperties.value, hudItem.ItemProperties.weight, hudItem.Prefab);
+        SpawnSign(s_CurrentAddItemMenuSpawnPoint.gameObject);
+
+        var inventory = m_Player.GetComponent<Inventory>();
+        inventory.RemoveItem(hudItem);
+		IsSelectingHUDItem = false;
+	}
+
+	public void OnAddItemMenuCancelButtonPressed()
     {
         Destroy(s_ActiveAddItemMenu);
     }
