@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 public class PlayerHUDController : MonoBehaviour
 {
@@ -76,6 +77,31 @@ public class PlayerHUDController : MonoBehaviour
 					m_IsEnteringNumber = true;
 
 					SetKnapsackCapacityText("ENTER NUMBER");
+				}
+			}
+		}
+
+		RaycastHit raycastSceneHit;
+		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastSceneHit))
+		{
+			// Outlining the Hovered Items
+			// Reset the Outlines of all Items
+			var items = ItemSpawner.Instance.GetItems();
+			foreach (var item in items)
+			{
+				if (item.TryGetComponent<Outline>(out var outline))
+				{
+					outline.OutlineColor = Color.clear;
+				}
+			}
+
+			// "Reoutline" the currently hovered Item (if one is)
+			if (raycastSceneHit.collider.CompareTag("Item"))
+			{
+				var colliderGameObject = raycastSceneHit.collider;
+				if (colliderGameObject.TryGetComponent<Outline>(out var outline))
+				{
+					outline.OutlineColor = Color.white;
 				}
 			}
 		}
