@@ -14,31 +14,74 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _playerControls = new PlayerInputActions();
+        //_playerControls = new PlayerInputActions();
     }
 
     private void OnEnable()
     {
-        _movementInputAction = _playerControls.Player.Move;
-        _movementInputAction.Enable();
-        _movementInputAction.performed += MovePerformed;
-        _movementInputAction.canceled += MovePerformed;
+        //_movementInputAction = _playerControls.Player.Move;
+        //_movementInputAction.Enable();
+        //_movementInputAction.performed += MovePerformed;
+        //_movementInputAction.canceled += MovePerformed;
     }
 
-    private void MovePerformed(InputAction.CallbackContext context)
+	private void Start()
+	{
+	}
+
+	private void MovePerformed(InputAction.CallbackContext context)
     {
-        _movementDirection = _movementInputAction.ReadValue<Vector2>();        
-        RotateToWalkingDirection();
+        //_movementDirection = _movementInputAction.ReadValue<Vector2>();        
+        //RotateToWalkingDirection();
     }
 
     private void OnDisable()
     {
-        _movementInputAction.Disable();
+        //_movementInputAction.Disable();
     }
 
-    private void FixedUpdate()
+	private void Update()
+	{
+        var camera = Camera.main;
+
+        var movementVector = new Vector3();
+        var hasMoved = false;
+
+		if (Input.GetKey(KeyCode.W))
+        {
+            movementVector += camera.transform.forward;
+            hasMoved = true;
+		}
+
+		if (Input.GetKey(KeyCode.S))
+		{
+			movementVector -= camera.transform.forward;
+			hasMoved = true;
+		}
+
+		if (Input.GetKey(KeyCode.A))
+		{
+			movementVector -= camera.transform.right;
+			hasMoved = true;
+		}
+
+		if (Input.GetKey(KeyCode.D))
+		{
+			movementVector += camera.transform.right;
+			hasMoved = true;
+		}
+
+        if (hasMoved)
+        {
+			movementVector.Normalize();
+
+            transform.position += movementVector * (Time.deltaTime * _movementSpeed);
+		}
+	}
+
+	private void FixedUpdate()
     {
-        _playerRigidbody.velocity = new Vector3(_movementDirection.x * _movementSpeed, _playerRigidbody.velocity.y, _movementDirection.y * _movementSpeed);
+        //_playerRigidbody.velocity = new Vector3(_movementDirection.x * _movementSpeed, _playerRigidbody.velocity.y, _movementDirection.y * _movementSpeed);
         //RotateToWalkingDirection();
     }
 
@@ -47,9 +90,9 @@ public class PlayerMovement : MonoBehaviour
         //float angle = Vector3.Angle(movementDirection, transform.forward);
         //playerRigidbody.rotation = Quaternion.Euler(0, angle, 0);
         //playerRigidbody.MoveRotation(Quaternion.Euler(0, angle, 0));
-        if (_movementDirection != Vector2.zero) 
+        /*if (_movementDirection != Vector2.zero) 
         {
             transform.forward = new Vector3(_movementDirection.x, 0, _movementDirection.y);
-        }
+        }*/
     }
 }

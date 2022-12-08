@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
 	[SerializeField] private GameObject _player;
-	[SerializeField] private Vector3 _offset = new Vector3(0, 5, -5);
+	//[SerializeField] private Vector3 _offset = new Vector3(0, 5, -5);
 
 	public float OffsetY = 3.0f;
 	public float DistanceToPlayer = 3.0f;
@@ -58,6 +58,10 @@ public class CameraControl : MonoBehaviour
 		{
 			transform.position = ourNewPos;
 			transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y + m_CameraAngles.y / 10.0f, _player.transform.position.z));
+
+			var curCamRotation = transform.rotation.eulerAngles;
+			_player.transform.rotation = Quaternion.Euler(0.0f, curCamRotation.y, 0.0f);
+			transform.localRotation = Quaternion.Euler(curCamRotation.x, 0.0f, 0.0f);
 		}
 	}
 }
