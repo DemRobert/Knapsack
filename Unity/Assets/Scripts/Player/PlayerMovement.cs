@@ -42,32 +42,40 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+        if (PlayerHUDController.Instance.IsPaused())
+        {
+            return;
+        }
+
         var camera = Camera.main;
 
         var movementVector = new Vector3();
         var hasMoved = false;
 
+        var forwardVector = new Vector3(camera.transform.forward.x, 0.0f, camera.transform.forward.z).normalized;
+        var leftVector = -new Vector3(camera.transform.right.x, 0.0f, camera.transform.right.z).normalized;
+
 		if (Input.GetKey(KeyCode.W))
         {
-            movementVector += camera.transform.forward;
+            movementVector += forwardVector;
             hasMoved = true;
 		}
 
 		if (Input.GetKey(KeyCode.S))
 		{
-			movementVector -= camera.transform.forward;
+			movementVector -= forwardVector;
 			hasMoved = true;
 		}
 
 		if (Input.GetKey(KeyCode.A))
 		{
-			movementVector -= camera.transform.right;
+			movementVector += leftVector;
 			hasMoved = true;
 		}
 
 		if (Input.GetKey(KeyCode.D))
 		{
-			movementVector += camera.transform.right;
+			movementVector -= leftVector;
 			hasMoved = true;
 		}
 

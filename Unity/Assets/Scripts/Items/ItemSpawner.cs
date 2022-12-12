@@ -129,7 +129,10 @@ public class ItemSpawner : MonoBehaviour
     {
 		var itemParent = spawnPoint.transform.Find("Item");
 
-		var curItem = Instantiate(prefab, itemParent);
+        var spawnPosition = itemParent.position;
+        spawnPosition.y += 0.3f;
+
+		var curItem = Instantiate(prefab, spawnPosition, prefab.transform.rotation, itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
@@ -201,7 +204,7 @@ public class ItemSpawner : MonoBehaviour
 
 		var spawnPointPos = spawnPoint.transform.position;
 		// 'right' is the red Arrow in the Editor
-		var curSpawnLocationSignOffset = spawnLocationSignOffsetY + spawnedItem.right * 0.2f;
+		var curSpawnLocationSignOffset = spawnLocationSignOffsetY + spawnPoint.transform.right*0.4f;
 		var signPos = spawnPointPos + curSpawnLocationSignOffset;
 
         //Debug.Log(SignParentObject == null);

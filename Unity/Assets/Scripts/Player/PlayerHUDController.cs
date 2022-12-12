@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public class PlayerHUDController : MonoBehaviour
 {
     public static PlayerHUDController Instance;
 
     public TextMeshProUGUI KnapsackCapacityText;
+
+	public GameObject PauseMenu;
 
     private int m_KnapsackCapacity = 0;
     private int m_OldKnapsackCapacity = 0;
@@ -29,6 +32,11 @@ public class PlayerHUDController : MonoBehaviour
 		SetKnapsackCapacity(1);
 
 		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
+	}
+
+	public bool IsPaused()
+	{
+		return PauseMenu.activeInHierarchy;
 	}
 
 	private void Update()
@@ -151,6 +159,18 @@ public class PlayerHUDController : MonoBehaviour
 			}
 		}
 
+		if (!m_IsEnteringNumber && Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (PauseMenu.activeInHierarchy)
+			{
+				PauseMenu.SetActive(false);
+			}
+			else
+			{
+				PauseMenu.SetActive(true);
+			}
+		}
+
 		if (m_IsEnteringNumber)
 		{
 			var anyButtonPressed = false;
@@ -179,6 +199,22 @@ public class PlayerHUDController : MonoBehaviour
 				m_CurrentlyTypedString = "";
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			m_PlayerInventory.Maximized = !m_PlayerInventory.Maximized;
+			m_PlayerInventory.UpdateInventory();
+		}
+	}
+
+	public void OnPauseMenuContinueButtonPressed()
+	{
+		PauseMenu.SetActive(false);
+	}
+
+	public void OnPauseMenuQuitButtonPressed()
+	{
+		SceneManager.LoadScene("MainMenu");
 	}
 
 	public void SetKnapsackCapacity(int capacity)

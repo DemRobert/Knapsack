@@ -20,6 +20,11 @@ public class CameraControl : MonoBehaviour
 
 	private void Update()
 	{
+		if (PlayerHUDController.Instance.IsPaused())
+		{
+			return;
+		}
+
 		//transform.position = _player.transform.position + _offset;
 
 		if (Input.GetMouseButton(1))
