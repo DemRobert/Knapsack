@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Mandarinen
+  m_Name: Wein
   m_EditorClassIdentifier: 
-  Name: Mandarinen
-  Model: {fileID: 2261259887567733474, guid: ae10cc809d676064d9f89ca7863cd4d7, type: 3}
-  Value: 550
-  Weight: 1000
+  Name: Wein
+  Model: {fileID: 7872548470375674961, guid: 1de8e8a2f69d94b438a5408aae14bd64, type: 3}
+  Value: 130
+  Weight: 1100

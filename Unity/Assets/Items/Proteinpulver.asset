@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Bierflasche
+  m_Name: Proteinpulver
   m_EditorClassIdentifier: 
-  Name: Bierflasche
-  Model: {fileID: 6810942595627918280, guid: 41e47f8f296fee445b36a4cec21a3fd6, type: 3}
-  Value: 50
-  Weight: 850
+  Name: Proteinpulver
+  Model: {fileID: 2300897986940477484, guid: 22a93423fb569f848abb1daed2e1428b, type: 3}
+  Value: 130
+  Weight: 1100

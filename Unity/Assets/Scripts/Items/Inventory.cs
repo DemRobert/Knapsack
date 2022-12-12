@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     public Transform ItemsInHUDParent;
 
     public bool Maximized = false;
-    private float m_MaximizedInventoryScale = 2.5f;
+    private float m_MaximizedInventoryScale = 2.0f;
 
     public List<HUDItem> GetItems()
     {
@@ -70,8 +70,8 @@ public class Inventory : MonoBehaviour
             xOffsetToNextItem *= m_MaximizedInventoryScale;
 			yOffsetToNextItem *= m_MaximizedInventoryScale;
 
-            startX += AssociatedCanvas.renderingDisplaySize.x*0.5f - 90.0f;
-			startY *= 0.75f;
+            startX += AssociatedCanvas.renderingDisplaySize.x*0.5f - 75.0f;
+			startY *= 0.85f;
 		}
 
 		// 2 Items per Row

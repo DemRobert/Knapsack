@@ -61,7 +61,7 @@ public class PlayerHUDController : MonoBehaviour
 				{
 					var imageComponent = raycastGameObject.GetComponent<Image>();
 					// The associated SpawnPoint of the Image/Canvas (parent.parent)
-					var spawnPoint = raycastGameObject.transform.parent.parent;
+					var spawnPoint = ItemSpawner.GetSpawnPoint(raycastGameObject);
 
 					switch (imageComponent.sprite.name)
 					{
@@ -108,7 +108,8 @@ public class PlayerHUDController : MonoBehaviour
 			var items = ItemSpawner.Instance.GetItems();
 			foreach (var item in items)
 			{
-				if (item.TryGetComponent<Outline>(out var outline))
+				var outline = GetComponentFromParent<Outline>(item.transform);
+				if (outline != null)
 				{
 					outline.OutlineColor = Color.clear;
 				}
@@ -118,7 +119,9 @@ public class PlayerHUDController : MonoBehaviour
 			if (raycastSceneHit.collider.CompareTag("Item"))
 			{
 				var colliderGameObject = raycastSceneHit.collider.gameObject;
-				if (colliderGameObject.TryGetComponent<Outline>(out var outline))
+
+				var outline = GetComponentFromParent<Outline>(colliderGameObject.transform);
+				if (outline != null)
 				{
 					outline.OutlineColor = Color.white;
 				}
@@ -130,7 +133,8 @@ public class PlayerHUDController : MonoBehaviour
 					var itemPrefabScript = colliderGameObject.GetComponent<ItemPrefab>();
 					m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, itemPrefabScript.GetComponent<ItemProperties>(), itemPrefabScript.ObjectAsSprite));
 
-					ItemSpawner.Instance.RemoveItem(hitObjectGameObject);
+					var spawnPoint = ItemSpawner.GetSpawnPoint(hitObjectGameObject);
+					ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
 				}
 			}
 		}
@@ -205,6 +209,29 @@ public class PlayerHUDController : MonoBehaviour
 			m_PlayerInventory.Maximized = !m_PlayerInventory.Maximized;
 			m_PlayerInventory.UpdateInventory();
 		}
+	}
+
+	// Will search for the specified Component in
+	// the parent as well as in all of his Children.
+	// Returns null if the Component could not be found.
+	public static T GetComponentFromParent<T>(Transform parent)
+	{
+		if (parent.TryGetComponent<T>(out var result))
+		{
+			return result;
+		}
+
+		for (var i = 0; i < parent.childCount; ++i)
+		{
+			var childResult = GetComponentFromParent<T>(parent.GetChild(i));
+			if (childResult != null)
+			{
+				return childResult;
+			}
+		}
+		
+		// null for Generics because T could be non-nullable
+		return default;
 	}
 
 	public void OnPauseMenuContinueButtonPressed()

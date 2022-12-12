@@ -125,6 +125,17 @@ public class ItemSpawner : MonoBehaviour
 		}
     }
 
+    private void SetItemTagForChildren(Transform parent)
+    {
+        for (var i = 0; i < parent.childCount; ++i)
+        {
+            var curChild = parent.GetChild(i);
+
+            curChild.tag = "Item";
+            SetItemTagForChildren(curChild);
+		}
+    }
+
 	private void SpawnItem(GameObject spawnPoint, int value, int weight, GameObject prefab)
     {
 		var itemParent = spawnPoint.transform.Find("Item");
@@ -136,9 +147,14 @@ public class ItemSpawner : MonoBehaviour
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
+        // Wichtig: Weil die Itemprefabs manchmal aus mehr als nur einem
+        // GameObject bestehen (Kinder besitzen), müssen wir diesen
+        // (da diese die eigentlich sichtbaren Objekte sind) ebenfalls den Tag Item geben 
+        SetItemTagForChildren(curItem.transform);
+
 		m_Items.Add(curItem);
 
-		var itemProperties = curItem.GetComponent<ItemProperties>();
+        var itemProperties = PlayerHUDController.GetComponentFromParent<ItemProperties>(curItem.transform);
 		itemProperties.value = value;
 		itemProperties.weight = weight;
 
@@ -146,8 +162,8 @@ public class ItemSpawner : MonoBehaviour
 		var imageComponent = spawnPoint.transform.Find("Canvas").Find("Image").GetComponent<Image>();
 		imageComponent.sprite = RemoveItemImage;
 
-        var itemPrefab = curItem.GetComponent<ItemPrefab>();
-        itemPrefab.SetPrefab(prefab);
+        var itemPrefab = PlayerHUDController.GetComponentFromParent<ItemPrefab>(curItem.transform);
+		itemPrefab.SetPrefab(prefab);
 
 		itemProperties.Id = GetNextId();
 	}
@@ -211,8 +227,8 @@ public class ItemSpawner : MonoBehaviour
         // Spawnt zur Runtime nicht im Parent??
 		var sign = Instantiate(SignPrefab, signPos, spawnPoint.transform.rotation, SignParentObject);
 
-		var itemProperties = spawnedItem.GetComponent<ItemProperties>();
-		var signControllerScript = sign.GetComponent<SignController>();
+		var itemProperties = PlayerHUDController.GetComponentFromParent<ItemProperties>(spawnedItem);
+		var signControllerScript = PlayerHUDController.GetComponentFromParent<SignController>(sign.transform);
 
 		signControllerScript.SetWeight(itemProperties.weight);
 		signControllerScript.SetValue(itemProperties.value);
@@ -220,17 +236,21 @@ public class ItemSpawner : MonoBehaviour
 		signControllerScript.Id = itemProperties.Id;
 	}
 
-    private Transform GetSpawnPoint(GameObject item)
+    public static Transform GetSpawnPoint(GameObject item)
     {
-        return item.transform.parent.parent;
+		// Weil das angeklickte Objekt nicht immer der Parent
+		// des eigentlichen Items, welches gespawnt wurde, ist
+		var result = item.transform.parent.parent;
+        for (var i = 0; !result.CompareTag("ItemSpawnPoint") && i < 5; result = result.parent, ++i);
+
+        return result;
     }
 
     public void RemoveItem(GameObject item)
     {
-        var itemParent = item.transform.parent;
         // Only has 1 Child -> the Item(model)
 		m_Items.Remove(item);
-		m_FreedIds.Enqueue(item.GetComponent<ItemProperties>().Id);
+		m_FreedIds.Enqueue(PlayerHUDController.GetComponentFromParent<ItemProperties>(item.transform).Id);
 
 		// Remove and Destroy the associated Sign
 		var associatedSign = FindAssociatedSign(item);
@@ -323,8 +343,8 @@ public class ItemSpawner : MonoBehaviour
         var signs = GameObject.FindGameObjectsWithTag("Sign");
         foreach (var sign in signs)
         {
-            if (item.GetComponent<ItemProperties>().Id ==
-				sign.GetComponent<SignController>().Id)
+            if (PlayerHUDController.GetComponentFromParent<ItemProperties>(item.transform).Id ==
+				PlayerHUDController.GetComponentFromParent<SignController>(sign.transform).Id)
             {
                 return sign;
             }

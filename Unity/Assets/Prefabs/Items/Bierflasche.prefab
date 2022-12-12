@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2022277838945903707
+--- !u!1 &948978190956291908
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2667481994019169752}
-  - component: {fileID: 170207874574790148}
-  - component: {fileID: 9035193222305915788}
-  - component: {fileID: 1994420387004020409}
-  - component: {fileID: 1201972974925442820}
-  - component: {fileID: 4113205235300024333}
-  - component: {fileID: 5068364870288448470}
-  - component: {fileID: 5716211479854654593}
+  - component: {fileID: 459545349870763518}
+  - component: {fileID: 3589221134114337371}
+  - component: {fileID: 1597527530613851793}
+  - component: {fileID: 3318817288018914333}
+  - component: {fileID: 3273947965723774398}
+  - component: {fileID: 2923269932210500028}
+  - component: {fileID: 2251327033057091132}
+  - component: {fileID: -7452921294064546399}
   m_Layer: 0
-  m_Name: Can
+  m_Name: Bierflasche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2667481994019169752
+--- !u!4 &459545349870763518
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_GameObject: {fileID: 948978190956291908}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -3.96848e-17, y: 0.17872445, z: 0.0047032754}
+  m_LocalScale: {x: 111.03622, y: 111.03622, z: 182.34927}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &170207874574790148
+--- !u!33 &3589221134114337371
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &9035193222305915788
+  m_GameObject: {fileID: 948978190956291908}
+  m_Mesh: {fileID: 2534964839176971238, guid: 752f3efbf1e863546a028b119cc4411a, type: 3}
+--- !u!23 &1597527530613851793
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -66,7 +66,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -3941846155053773027, guid: 752f3efbf1e863546a028b119cc4411a, type: 3}
+  - {fileID: 1417817024095648807, guid: 752f3efbf1e863546a028b119cc4411a, type: 3}
+  - {fileID: -657880879797694904, guid: 752f3efbf1e863546a028b119cc4411a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,27 +90,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1994420387004020409
-CapsuleCollider:
+--- !u!64 &3318817288018914333
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!54 &1201972974925442820
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: 752f3efbf1e863546a028b119cc4411a, type: 3}
+--- !u!54 &3273947965723774398
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -118,13 +120,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4113205235300024333
+--- !u!114 &2923269932210500028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f5d955747abde94e9341f0c5af5c66d, type: 3}
@@ -133,13 +135,13 @@ MonoBehaviour:
   value: 1
   weight: 1
   Id: -1
---- !u!114 &5068364870288448470
+--- !u!114 &2251327033057091132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7f1259b38661fe40a17a39db4830a40, type: 3}
@@ -147,20 +149,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 0}
   ObjectAsSprite: {fileID: 0}
---- !u!114 &5716211479854654593
+--- !u!114 &-7452921294064546399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022277838945903707}
+  m_GameObject: {fileID: 948978190956291908}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 0}
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []

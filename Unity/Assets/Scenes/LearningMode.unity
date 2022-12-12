@@ -981,11 +981,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefabs:
-  - {fileID: 11400000, guid: eff3808f7078e1a469ad4f8e0f852510, type: 2}
-  - {fileID: 11400000, guid: b8024fdd226b8954195589fc00696186, type: 2}
-  - {fileID: 11400000, guid: da521248c3efeda45bcba61296a78d46, type: 2}
+  - {fileID: 11400000, guid: 71a9157a624d1bc4998e0d4737507f11, type: 2}
+  - {fileID: 11400000, guid: ead99b837184b7a4996fc3cc9b188897, type: 2}
+  - {fileID: 11400000, guid: 779c3b65fb900a64a9bd8aa767457efc, type: 2}
+  - {fileID: 11400000, guid: ebf4a41968371fb438d484af323e4ad1, type: 2}
+  - {fileID: 11400000, guid: 195630abba4f76e4b933b86109a11576, type: 2}
+  - {fileID: 11400000, guid: cf24e6e51a2e454489ab00f8c04da70a, type: 2}
+  - {fileID: 11400000, guid: 27014ac0598055448b1149bb064d2732, type: 2}
+  - {fileID: 11400000, guid: 135a8d43b194ab947851fb1bba9f49e7, type: 2}
+  - {fileID: 11400000, guid: 4e536a6bb8cb8b847b803c3182a63a26, type: 2}
+  - {fileID: 11400000, guid: f7343af5abbcac74f93028ef1ef0a79d, type: 2}
   ConsiderPrioritySpawnPoints: 1
-  CountOfItemsToSpawn: 5
+  CountOfItemsToSpawn: 8
   SpawnPoints: []
   PrioritySpawnPoints:
   - {fileID: 204185875}
