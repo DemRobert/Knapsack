@@ -277,8 +277,179 @@ Transform:
   - {fileID: 1744466096}
   - {fileID: 239846453}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &740120812
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.65093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.95139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+--- !u!1001 &1011395418
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.40168
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.95139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+--- !u!1001 &1021635231
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.65093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
 --- !u!1001 &1031174679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -375,6 +546,63 @@ Transform:
   m_Father: {fileID: 1821135680}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1112834142
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.65093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
 --- !u!1 &1132631421
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +634,63 @@ Transform:
   m_Father: {fileID: 1821135680}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1244494657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.90018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.95139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
 --- !u!1 &1487469370
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +722,120 @@ Transform:
   m_Father: {fileID: 1821135680}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1509898905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.90018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+--- !u!1001 &1581891982
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.40168
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
 --- !u!1 &1629750496
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +919,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1629750500
 MonoBehaviour:
@@ -535,7 +934,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 239846448}
-  _offset: {x: 0, y: 9, z: -9}
+  OffsetY: 3
+  DistanceToPlayer: 3
+  FocusLength: 4
+--- !u!1001 &1717525458
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.90018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
 --- !u!1001 &1744466095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -792,12 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ItemPrefabs: []
   ConsiderPrioritySpawnPoints: 0
   CountOfItemsToSpawn: 5
   SpawnPoints:
@@ -816,6 +1269,8 @@ MonoBehaviour:
   AddItemImage: {fileID: 0}
   RemoveItemImage: {fileID: 0}
   AddItemMenu: {fileID: 0}
+  AddItemSelectMenu: {fileID: 0}
+  IsSelectingHUDItem: 0
 --- !u!114 &1821135683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,12 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
+  ItemPrefabs: []
   ConsiderPrioritySpawnPoints: 1
   CountOfItemsToSpawn: 5
   SpawnPoints: []
@@ -843,6 +1293,8 @@ MonoBehaviour:
   AddItemImage: {fileID: 0}
   RemoveItemImage: {fileID: 0}
   AddItemMenu: {fileID: 0}
+  AddItemSelectMenu: {fileID: 0}
+  IsSelectingHUDItem: 0
 --- !u!114 &1821135684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventSystem: {fileID: 1924038497}
+  GameMode: 0
 --- !u!1 &1850038952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,3 +1462,60 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1001 &2056517668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.40168
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914099103304282712, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726805993987516642, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
+      propertyPath: m_Name
+      value: Regal_3_Ablage_einseitig_SpawnPoints (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d446484ff3bc8f347a5b879bf5805c91, type: 3}
