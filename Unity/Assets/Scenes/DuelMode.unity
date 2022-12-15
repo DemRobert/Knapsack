@@ -286,6 +286,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 725425240}
     m_Modifications:
+    - target: {fileID: 4681788705181673272, guid: 67dc68096c0aeba44a784288c3732d37, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681788705181673272, guid: 67dc68096c0aeba44a784288c3732d37, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681788705181673272, guid: 67dc68096c0aeba44a784288c3732d37, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.9254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681788705181673272, guid: 67dc68096c0aeba44a784288c3732d37, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.9254902
+      objectReference: {fileID: 0}
     - target: {fileID: 7021891819851579828, guid: 67dc68096c0aeba44a784288c3732d37, type: 3}
       propertyPath: m_Center.y
       value: 1
@@ -535,7 +551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 239846448}
-  _offset: {x: 0, y: 9, z: -9}
+  OffsetY: 3
+  DistanceToPlayer: 3
+  FocusLength: 4
 --- !u!1001 &1744466095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -549,19 +567,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 219566804, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 7.061191e+17
+      value: 9.403955e-38
       objectReference: {fileID: 0}
     - target: {fileID: 219566804, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.05e-43
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 219566804, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.0058797e-11
+      value: 3.722683e+26
       objectReference: {fileID: 0}
     - target: {fileID: 219566804, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: -1.2028857e+26
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 427061129, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -569,15 +587,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427061130, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 8.5e-44
+      value: 4e-45
       objectReference: {fileID: 0}
     - target: {fileID: 427061130, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 6.08e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427061130, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.1278962e-19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427061130, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
@@ -605,19 +623,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806732428, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 10.026717
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 806732428, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.6634185e+22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 806732428, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: NaN
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 806732428, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 4.5581245e+30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1231357641, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -625,19 +643,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1231357642, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 7.061191e+17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1231357642, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.05e-43
+      value: 7.7e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1231357642, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.0058797e-11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1231357642, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: -1.20288645e+26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447064553, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -645,19 +663,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1447064554, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 5.76e-43
+      value: 0.00000002753599
       objectReference: {fileID: 0}
     - target: {fileID: 1447064554, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1.05e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447064554, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.051354e-11
+      value: 5.62495e-36
       objectReference: {fileID: 0}
     - target: {fileID: 1447064554, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.4e-44
+      value: 7.68e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1467649856, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -665,19 +683,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1467649857, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.4607148e-19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1467649857, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.556296e+31
+      value: 7.7e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1467649857, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 6.878344e+11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1467649857, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.3982314e+31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1790147584624071792, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_RootOrder
@@ -748,9 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1821135680}
   - component: {fileID: 1821135682}
-  - component: {fileID: 1821135683}
   - component: {fileID: 1821135685}
-  - component: {fileID: 1821135684}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -792,12 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ItemPrefabs: []
   ConsiderPrioritySpawnPoints: 0
   CountOfItemsToSpawn: 5
   SpawnPoints:
@@ -816,46 +827,8 @@ MonoBehaviour:
   AddItemImage: {fileID: 0}
   RemoveItemImage: {fileID: 0}
   AddItemMenu: {fileID: 0}
---- !u!114 &1821135683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821135678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  - {fileID: 11400000, guid: 355b701a6c37d764d807bbb476bd7f76, type: 2}
-  ConsiderPrioritySpawnPoints: 1
-  CountOfItemsToSpawn: 5
-  SpawnPoints: []
-  PrioritySpawnPoints: []
-  SignPrefab: {fileID: 0}
-  SignParentObject: {fileID: 0}
-  AddItemImage: {fileID: 0}
-  RemoveItemImage: {fileID: 0}
-  AddItemMenu: {fileID: 0}
---- !u!114 &1821135684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821135678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cf2aae50021a14d8c51201cb521859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maximumWeight: 50
+  AddItemSelectMenu: {fileID: 0}
+  IsSelectingHUDItem: 0
 --- !u!114 &1821135685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventSystem: {fileID: 1924038497}
+  GameMode: 0
 --- !u!1 &1850038952
 GameObject:
   m_ObjectHideFlags: 0

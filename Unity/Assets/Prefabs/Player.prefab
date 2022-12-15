@@ -975,9 +975,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7021891819851579832}
-  - component: {fileID: 7021891819851579831}
   - component: {fileID: 7021891819851579828}
   - component: {fileID: 1716119829}
+  - component: {fileID: 8962975208935943113}
   - component: {fileID: 3525011954616282197}
   m_Layer: 0
   m_Name: Player
@@ -1004,20 +1004,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7021891819851579831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7021891819851579833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63f1f849ecf26ee47a46f69744e6ade1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerRigidbody: {fileID: 0}
-  _movementSpeed: 5
 --- !u!65 &7021891819851579828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1029,8 +1015,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.049483, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 0.8857279, y: 2.7952788, z: 1}
+  m_Center: {x: -0.057136044, y: 1.372898, z: 0}
 --- !u!54 &1716119829
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1045,8 +1031,21 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8962975208935943113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021891819851579833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec6b0ca8bb6ba142b201105c066f2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 4.86
 --- !u!114 &3525011954616282197
 MonoBehaviour:
   m_ObjectHideFlags: 0
