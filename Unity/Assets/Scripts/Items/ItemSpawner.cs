@@ -140,7 +140,7 @@ public class ItemSpawner : MonoBehaviour
 		var itemParent = spawnPoint.transform.Find("Item");
 
         var spawnPosition = itemParent.position;
-        spawnPosition.y += 0.3f;
+        spawnPosition.y += 0.15f;
 
         var prefabEulerRotation = prefab.transform.rotation.eulerAngles;
         var spawnPointEulerRotation = spawnPoint.transform.rotation.eulerAngles;
