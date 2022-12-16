@@ -142,7 +142,10 @@ public class ItemSpawner : MonoBehaviour
         var spawnPosition = itemParent.position;
         spawnPosition.y += 0.3f;
 
-		var curItem = Instantiate(prefab, spawnPosition, spawnPoint.transform.rotation, itemParent);
+        var prefabEulerRotation = prefab.transform.rotation.eulerAngles;
+        var spawnPointEulerRotation = spawnPoint.transform.rotation.eulerAngles;
+
+		var curItem = Instantiate(prefab, spawnPosition, Quaternion.Euler(prefabEulerRotation.x, spawnPointEulerRotation.y, prefabEulerRotation.z), itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
