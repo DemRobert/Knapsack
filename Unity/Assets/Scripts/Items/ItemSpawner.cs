@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -143,7 +142,7 @@ public class ItemSpawner : MonoBehaviour
         var spawnPosition = itemParent.position;
         spawnPosition.y += 0.3f;
 
-		var curItem = Instantiate(prefab, spawnPosition, prefab.transform.rotation, itemParent);
+		var curItem = Instantiate(prefab, spawnPosition, spawnPoint.transform.rotation, itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
