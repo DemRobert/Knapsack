@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -141,9 +140,12 @@ public class ItemSpawner : MonoBehaviour
 		var itemParent = spawnPoint.transform.Find("Item");
 
         var spawnPosition = itemParent.position;
-        spawnPosition.y += 0.3f;
+        spawnPosition.y += 0.15f;
 
-		var curItem = Instantiate(prefab, spawnPosition, prefab.transform.rotation, itemParent);
+        var prefabEulerRotation = prefab.transform.rotation.eulerAngles;
+        var spawnPointEulerRotation = spawnPoint.transform.rotation.eulerAngles;
+
+		var curItem = Instantiate(prefab, spawnPosition, Quaternion.Euler(prefabEulerRotation.x, spawnPointEulerRotation.y, prefabEulerRotation.z), itemParent);
 		m_UsedSpawnPoints.Add(spawnPoint);
 		curItem.tag = "Item";
 
