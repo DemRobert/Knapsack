@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Eier
   Model: {fileID: 6089576149185506380, guid: 8f168dc148a4bba428cf5e2539cddae0, type: 3}
-  Value: 350
-  Weight: 500
+  Value: 4
+  Weight: 5

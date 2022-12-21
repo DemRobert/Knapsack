@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Proteinpulver
   Model: {fileID: 2300897986940477484, guid: 22a93423fb569f848abb1daed2e1428b, type: 3}
-  Value: 130
-  Weight: 1100
+  Value: 4
+  Weight: 11

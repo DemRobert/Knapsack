@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Jack Daniels
   Model: {fileID: 4109379004592029037, guid: 8f8715a60d9f8f84a804bca81e526ca4, type: 3}
-  Value: 2000
-  Weight: 1100
+  Value: 20
+  Weight: 11

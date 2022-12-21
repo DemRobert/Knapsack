@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bierflasche
   Model: {fileID: 948978190956291908, guid: 2790777b40b3bda43a1211a9e4915e3e, type: 3}
-  Value: 50
-  Weight: 850
+  Value: 2
+  Weight: 9

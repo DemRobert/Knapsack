@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Milk
   Model: {fileID: 1055425687801960466, guid: 81feacd38d9a657408ac9e9b979a6752, type: 3}
-  Value: 130
-  Weight: 1100
+  Value: 3
+  Weight: 9

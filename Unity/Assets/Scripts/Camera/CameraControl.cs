@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,12 +58,19 @@ public class CameraControl : MonoBehaviour
 		if (Input.GetMouseButton(2))
 		{
 			var cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-			transform.position = ourNewPos + cursorRay.direction * FocusLength;
+			var camDirWithoutY = new Vector3(transform.forward.x, 0.0f, transform.forward.z).normalized;
+			
+			// Kosinus des Winkels zwischen Camera.forward (nur geradeaus; y = 0.0) und des cursorRays
+			var angleBetweenCursorRayAndCamDir = Vector3.Dot(cursorRay.direction, camDirWithoutY);
+			// FocusLength muss angepasst werden, wegen Pythagoras und so
+			var transformedFocusLength = FocusLength / angleBetweenCursorRayAndCamDir;
+
+			transform.position = ourNewPos + cursorRay.direction*transformedFocusLength;
 		}
 		else
 		{
 			transform.position = ourNewPos;
-			transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y + m_CameraAngles.y / 10.0f, _player.transform.position.z));
+			transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y + m_CameraAngles.y/10.0f, _player.transform.position.z));
 
 			var curCamRotation = transform.rotation.eulerAngles;
 			_player.transform.rotation = Quaternion.Euler(0.0f, curCamRotation.y, 0.0f);
