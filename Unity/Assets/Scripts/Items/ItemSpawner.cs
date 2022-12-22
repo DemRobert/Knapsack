@@ -122,7 +122,38 @@ public class ItemSpawner : MonoBehaviour
         {
             SpawnItem(spawnPoints[i]);
 		}
-    }
+
+        // Test
+        var testDynProgrAlg = new DynamicProgAlgoBehaviour();
+
+        var itemProps = new ItemProperties[m_Items.Count];
+        for (var i = 0; i < itemProps.Length; ++i)
+        {
+            var curItemPropsComp = PlayerHUDController.GetComponentFromParent<ItemProperties>(m_Items[i].transform);
+
+			if (curItemPropsComp != null)
+            {
+                itemProps[i] = curItemPropsComp;
+            }
+            else
+            {
+                Debug.Log("Couldn't Test Dynamic Progr Alg. because unable to obtain the Item Properties Components.");
+
+                return;
+            }
+        }
+
+		testDynProgrAlg.StartAlgorithm(itemProps, PlayerHUDController.Instance.GetKnapsackCapacity(), out var selectedItems, out var totalValue, out var totalWeight);
+        Debug.Log("Total Value: " + totalValue);
+        Debug.Log("Total Weight: " + totalWeight);
+        
+        Debug.Log("Selected Items Count: " + selectedItems.Count);
+
+        foreach (var selItem in selectedItems)
+        {
+            Debug.Log("Value: " + selItem.value + ", Weight: " + selItem.weight);
+        }
+	}
 
     private void SetItemTagForChildren(Transform parent)
     {

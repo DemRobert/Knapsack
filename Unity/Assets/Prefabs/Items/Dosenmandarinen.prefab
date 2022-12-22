@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 360591586192594555}
   - component: {fileID: 3781032531636410245}
   - component: {fileID: 1370660828927635901}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Dosenmandarinen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &360591586192594555
 MonoBehaviour:

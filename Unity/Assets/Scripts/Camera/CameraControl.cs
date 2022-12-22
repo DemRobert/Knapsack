@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour
 	//[SerializeField] private Vector3 _offset = new Vector3(0, 5, -5);
 
 	public float OffsetY = 3.0f;
-	public float DistanceToPlayer = 3.0f;
+	public float DistanceToPlayer = 2.0f;
 
 	private Vector2 m_CameraAngles = new();
 	public float FocusLength = 4.0f;

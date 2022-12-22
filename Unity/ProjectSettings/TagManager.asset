@@ -9,11 +9,12 @@ TagManager:
   - Sign
   - KnapsackCapacity
   - Item
+  - ItemInHUD
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Item
   - Water
   - UI
   - 

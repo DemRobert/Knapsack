@@ -29,8 +29,8 @@ public class AlgorithmTester : MonoBehaviour
             }
             else if (_algoType == AlgoTypes.Dynamic)
             {
-                _algorithm = new DynamicProgAlgoBehaviour();
-                _algorithm.StartAlgorithm(_items, _maxWeight, out _selectedItems, out _algoSteps, out _selectedItemsTotalValue, out _selectedItemsTotalWeight);
+                //_algorithm = new DynamicProgAlgoBehaviour();
+                //_algorithm.StartAlgorithm(_items, _maxWeight, out _selectedItems, out _algoSteps, out _selectedItemsTotalValue, out _selectedItemsTotalWeight);
             }
 
             string itemsString = GetItemsInfoString(_items);

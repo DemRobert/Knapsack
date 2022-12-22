@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 440468293003756593}
   - component: {fileID: 8541689646168476593}
   - component: {fileID: 8132760384324310303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cardboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 3360479233161561673}
   - component: {fileID: 7777717365064070421}
   - component: {fileID: 7439946725186545689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eggs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6902141993742563062}
   - component: {fileID: -3625127366864644912}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

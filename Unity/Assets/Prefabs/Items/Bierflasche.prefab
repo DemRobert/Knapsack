@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2923269932210500028}
   - component: {fileID: 2251327033057091132}
   - component: {fileID: -7452921294064546399}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bierflasche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &2923269932210500028
 MonoBehaviour:

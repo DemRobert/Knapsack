@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3731704541662997001}
   - component: {fileID: 6777813227393979366}
   - component: {fileID: 8467603976556636891}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6746297179500651805}
   - component: {fileID: -6573052076742962952}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cornflakes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &6798544676796997686
 GameObject:
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 8013383654938973032}
   - component: {fileID: 1359897425323957092}
   - component: {fileID: 6185549130605167892}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cornflakesbeschriftung
   m_TagString: Untagged
   m_Icon: {fileID: 0}

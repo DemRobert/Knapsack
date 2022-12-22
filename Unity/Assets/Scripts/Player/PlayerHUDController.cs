@@ -21,6 +21,8 @@ public class PlayerHUDController : MonoBehaviour
 
 	private Inventory m_PlayerInventory;
 
+	public LayerMask PhysicsRayCastLayer;
+
 	private void Awake()
 	{
         Instance = this;
@@ -28,7 +30,7 @@ public class PlayerHUDController : MonoBehaviour
 
 	private void Start()
 	{
-		SetKnapsackCapacity(1);
+		SetKnapsackCapacity(25);
 
 		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
 	}
@@ -42,6 +44,7 @@ public class PlayerHUDController : MonoBehaviour
 	{
 		var eventSystem = GameManager.Instance.EventSystem;
 
+		var isCollidingWithUIStuff = false;
 		if (Input.GetMouseButtonDown(0))
 		{
 			var pointerEventData = new PointerEventData(eventSystem);
@@ -52,6 +55,8 @@ public class PlayerHUDController : MonoBehaviour
 
 			if (uiRaycastResults.Count > 0)
 			{
+				isCollidingWithUIStuff = true;
+
 				// We assume only one Result is valid (the 1st one)
 				var raycastResult = uiRaycastResults[0];
 				var raycastGameObject = raycastResult.gameObject;
@@ -86,7 +91,7 @@ public class PlayerHUDController : MonoBehaviour
 					m_OldKnapsackCapacity = m_KnapsackCapacity;
 					m_IsEnteringNumber = true;
 
-					SetKnapsackCapacityText("ENTER NUMBER");
+					SetKnapsackCapacityText("--");
 				}
 				else if (raycastGameObject.CompareTag("ItemInHUD"))
 				{
@@ -100,21 +105,9 @@ public class PlayerHUDController : MonoBehaviour
 		}
 
 		RaycastHit raycastSceneHit;
-		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastSceneHit))
+		if (!isCollidingWithUIStuff && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastSceneHit, 100.0f, PhysicsRayCastLayer))
 		{
 			// Outlining the Hovered Items
-			// Reset the Outlines of all Items
-			var items = ItemSpawner.Instance.GetItems();
-			foreach (var item in items)
-			{
-				var outline = GetComponentFromParent<Outline>(item.transform);
-				if (outline != null)
-				{
-					outline.OutlineColor = Color.clear;
-				}
-			}
-
-			// "Reoutline" the currently hovered Item (if one is)
 			if (raycastSceneHit.collider.CompareTag("Item"))
 			{
 				var colliderGameObject = raycastSceneHit.collider.gameObject;
@@ -137,6 +130,19 @@ public class PlayerHUDController : MonoBehaviour
 				}
 			}
 		}
+		else
+		{
+			// Reset the Outlines of all Items
+			var items = ItemSpawner.Instance.GetItems();
+			foreach (var item in items)
+			{
+				var outline = GetComponentFromParent<Outline>(item.transform);
+				if (outline != null)
+				{
+					outline.OutlineColor = Color.clear;
+				}
+			}
+		}
 
 		if (m_IsEnteringNumber)
 		{
@@ -147,8 +153,12 @@ public class PlayerHUDController : MonoBehaviour
 				// If a Digit is typed
 				if (curTyped >= 48 && curTyped <= 57)
 				{
-					m_CurrentlyTypedString += curTyped;
-					SetKnapsackCapacityText(m_CurrentlyTypedString);
+					// At most 3 Digits -> 999 = highest available
+					if (m_CurrentlyTypedString.Length < 3)
+					{
+						m_CurrentlyTypedString += curTyped;
+						SetKnapsackCapacityText(m_CurrentlyTypedString);
+					}
 				}
 				// If the Delete Button was pressed
 				else if (Input.GetKey(KeyCode.Backspace))
@@ -251,9 +261,8 @@ public class PlayerHUDController : MonoBehaviour
 
 	private void SetKnapsackCapacityText(string text)
 	{
-		KnapsackCapacityText.text = "Rucksackkapazität: " + text;
+		KnapsackCapacityText.text = text;
 	}
-
 
 	public int GetKnapsackCapacity()
     {
