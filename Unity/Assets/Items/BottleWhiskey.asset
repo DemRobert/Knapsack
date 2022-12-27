@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Eier
+  m_Name: BottleWhiskey
   m_EditorClassIdentifier: 
-  Name: Eier
-  Model: {fileID: 6089576149185506380, guid: 8f168dc148a4bba428cf5e2539cddae0, type: 3}
-  Value: 350
-  Weight: 500
+  Name: BottleWhiskey
+  Model: {fileID: 8919771907248857327, guid: 35164ee124ee2774c8e8cbde9572084a, type: 3}
+  Value: 2000
+  Weight: 1100

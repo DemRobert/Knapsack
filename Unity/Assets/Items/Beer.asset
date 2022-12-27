@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Wein
+  m_Name: Beer
   m_EditorClassIdentifier: 
-  Name: Wein
-  Model: {fileID: 7872548470375674961, guid: 1de8e8a2f69d94b438a5408aae14bd64, type: 3}
-  Value: 130
-  Weight: 1100
+  Name: Beer
+  Model: {fileID: 5491027291222382065, guid: fe64ca3be5660174bb9f952e371ed60b, type: 3}
+  Value: 50
+  Weight: 850

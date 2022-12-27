@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Katzenfutter
+  m_Name: Bottle
   m_EditorClassIdentifier: 
-  Name: Katzenfutter
-  Model: {fileID: 4839818043722358057, guid: 919d7165edd74604da84c14a97d5b4de, type: 3}
-  Value: 120
-  Weight: 500
+  Name: Bottle
+  Model: {fileID: 4206072942527185405, guid: 077ee0683ee7a624085ab860ea4a71e1, type: 3}
+  Value: 130
+  Weight: 1100

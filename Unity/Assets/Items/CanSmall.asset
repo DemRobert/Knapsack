@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97451153934a0f1439037dc794d7804f, type: 3}
-  m_Name: Mandarinen
+  m_Name: CanSmall
   m_EditorClassIdentifier: 
-  Name: Mandarinen
-  Model: {fileID: 4443757500639426529, guid: 0fee83b6f9ffde54fbc380924126666f, type: 3}
-  Value: 550
-  Weight: 1000
+  Name: CanSmall
+  Model: {fileID: 6052913130057649856, guid: 7adf354995f74f741a94f672b97a4d46, type: 3}
+  Value: 120
+  Weight: 500
