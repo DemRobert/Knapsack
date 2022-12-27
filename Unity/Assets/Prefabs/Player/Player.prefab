@@ -893,6 +893,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnapsackCapacityText: {fileID: 4197636940245852673}
   PauseMenu: {fileID: 4560410468501820559}
+  PhysicsRayCastLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6224674885518861349
 GameObject:
   m_ObjectHideFlags: 0
