@@ -87,7 +87,7 @@ public class PlayerHUDController : MonoBehaviour
 						break;
 					}
 				}
-				else if (GameManager.Instance.GameMode == GameManager.GameModes.LEARNING &&
+				else if (GameManager.Instance.GameMode == GameModes.LEARNING &&
 					raycastGameObject.name.Equals("Text_KnapsackCapacity"))
 				{
 					m_OldKnapsackCapacity = m_KnapsackCapacity;

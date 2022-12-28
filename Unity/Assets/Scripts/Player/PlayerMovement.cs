@@ -7,32 +7,32 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed = 3.0f;
-    private Vector2 _movementDirection = Vector2.zero;
-    private Rigidbody _playerRigidbody;
-    private PlayerInputActions _playerControls;
-    private InputAction _movementInputAction;
+    [SerializeField] private float m_movementSpeed = 3.0f;
+    private Vector2 m_movementDirection = Vector2.zero;
+    private Rigidbody m_playerRigidbody;
+    private PlayerInputActions m_playerControls;
+    private InputAction m_movementInputAction;
 
     private void Awake()
     {
-        _playerRigidbody = GetComponent<Rigidbody>();
-        _playerControls = new PlayerInputActions();
+        m_playerRigidbody = GetComponent<Rigidbody>();
+        m_playerControls = new PlayerInputActions();
     }
 
     private void OnEnable()
     {
-        _movementInputAction = _playerControls.Player.Move;
-        _movementInputAction.Enable();
+        m_movementInputAction = m_playerControls.Player.Move;
+        m_movementInputAction.Enable();
     }
 
     private void OnDisable()
     {
-        _movementInputAction.Disable();
+        m_movementInputAction.Disable();
     }
 
     private void Update()
     {
-        _movementDirection = _movementInputAction.ReadValue<Vector2>();
+        m_movementDirection = m_movementInputAction.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
@@ -41,8 +41,8 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         //_playerRigidbody.velocity = new Vector3(_movementDirection.x * _movementSpeed, _playerRigidbody.velocity.y, _movementDirection.y * _movementSpeed);
-        _playerRigidbody.velocity = transform.right * _movementSpeed * _movementDirection.x +
-                                    Vector3.up * _playerRigidbody.velocity.y +
-                                    transform.forward * _movementSpeed * _movementDirection.y;
+        m_playerRigidbody.velocity = transform.right * m_movementSpeed * m_movementDirection.x +
+                                    Vector3.up * m_playerRigidbody.velocity.y +
+                                    transform.forward * m_movementSpeed * m_movementDirection.y;
     }
 }

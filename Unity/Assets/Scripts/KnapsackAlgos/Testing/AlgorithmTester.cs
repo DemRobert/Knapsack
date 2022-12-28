@@ -8,11 +8,11 @@ public class AlgorithmTester : MonoBehaviour
 {
     public enum AlgoTypes { Greedy, Dynamic }
 
-    [SerializeField] private Item[] _items;
+    [SerializeField] private ItemProperties[] _items;
     [SerializeField] private AlgoTypes _algoType;
     [SerializeField] private int _maxWeight;
     private AlgoBehaviour _algorithm;
-    private Item[] _selectedItems;
+    private ItemProperties[] _selectedItems;
     private AlgoStep[] _algoSteps;
     private int _selectedItemsTotalValue;
     private int _selectedItemsTotalWeight;
@@ -28,7 +28,7 @@ public class AlgorithmTester : MonoBehaviour
 
                 object[] selectedItems;
                 _algorithm.StartAlgorithm(_items, _maxWeight, out selectedItems, out _algoSteps, out _selectedItemsTotalValue, out _selectedItemsTotalWeight);
-                _selectedItems = (Item[])selectedItems;
+                _selectedItems = (ItemProperties[])selectedItems;
 			}
             else if (_algoType == AlgoTypes.Dynamic)
             {
@@ -65,7 +65,7 @@ public class AlgorithmTester : MonoBehaviour
                 algoStepsInfo += $"Operation: {((DynamicProgAlgoStep)step).Operation}, Items: ";
 
             // Info on Items this step
-            Item[] stepItems = (Item[])step.Values;
+            ItemProperties[] stepItems = (ItemProperties[])step.Values;
             algoStepsInfo += GetItemsInfoString(stepItems);
 
             // Don't put spacer after last item
@@ -82,12 +82,12 @@ public class AlgorithmTester : MonoBehaviour
     /// </summary> 
     /// <param name="items"></param>
     /// <returns></returns>
-    private string GetItemsInfoString(Item[] items)
+    private string GetItemsInfoString(ItemProperties[] items)
     {
         string info = string.Empty;
-        foreach (Item item in items)
+        foreach (ItemProperties item in items)
         {
-            info += $"{item.Name}, V-W-Ratio: {(double)((double)item.Value / (double)item.Weight)}";
+            info += $"{item.Id}, V-W-Ratio: {(double)((double)item.value / (double)item.weight)}";
             // Don't put spacer after last item
             if (item != items[items.Length - 1]) 
                 info += "\t";
