@@ -22,6 +22,8 @@ public class PlayerHUDController : MonoBehaviour
 	private Inventory m_PlayerInventory;
 
 	public LayerMask PhysicsRayCastLayer;
+	private bool m_IsCollidingWithItem;
+	private bool m_HasRecentlyCollidedWithItem;
 
 	private void Awake()
 	{
@@ -69,20 +71,20 @@ public class PlayerHUDController : MonoBehaviour
 
 					switch (imageComponent.sprite.name)
 					{
-						case "RemoveItem":
-							ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
+					case "RemoveItem":
+						ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
 
-							break;
+						break;
 
-						case "AddItem":
-							ItemSpawner.Instance.AddItem(spawnPoint);
+					case "AddItem":
+						ItemSpawner.Instance.AddItem(spawnPoint);
 
-							break;
+						break;
 
-						default:
-							Debug.Log("PlayerMovement: UI Raycast; Name of Sprite of ImageComponent is not recognized!");
+					default:
+						Debug.Log("PlayerMovement: UI Raycast; Name of Sprite of ImageComponent is not recognized!");
 
-							break;
+						break;
 					}
 				}
 				else if (GameManager.Instance.GameMode == GameManager.GameModes.LEARNING &&
@@ -128,9 +130,21 @@ public class PlayerHUDController : MonoBehaviour
 					var spawnPoint = ItemSpawner.GetSpawnPoint(hitObjectGameObject);
 					ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
 				}
+
+				m_IsCollidingWithItem = true;
+				m_HasRecentlyCollidedWithItem = true;
+			}
+			else
+			{
+				m_IsCollidingWithItem = false;
 			}
 		}
 		else
+		{
+			m_IsCollidingWithItem = false;
+		}
+
+		if (m_HasRecentlyCollidedWithItem && !m_IsCollidingWithItem)
 		{
 			// Reset the Outlines of all Items
 			var items = ItemSpawner.Instance.GetItems();
@@ -142,6 +156,8 @@ public class PlayerHUDController : MonoBehaviour
 					outline.OutlineColor = Color.clear;
 				}
 			}
+
+			m_HasRecentlyCollidedWithItem = false;
 		}
 
 		if (m_IsEnteringNumber)
