@@ -25,8 +25,11 @@ public class AlgorithmTester : MonoBehaviour
             if (_algoType == AlgoTypes.Greedy)
             {
                 _algorithm = new GreedyAlgoBehaviour();
-                _algorithm.StartAlgorithm(_items, _maxWeight, out _selectedItems, out _algoSteps, out _selectedItemsTotalValue, out _selectedItemsTotalWeight);                
-            }
+
+                object[] selectedItems;
+                _algorithm.StartAlgorithm(_items, _maxWeight, out selectedItems, out _algoSteps, out _selectedItemsTotalValue, out _selectedItemsTotalWeight);
+                _selectedItems = (Item[])selectedItems;
+			}
             else if (_algoType == AlgoTypes.Dynamic)
             {
                 //_algorithm = new DynamicProgAlgoBehaviour();

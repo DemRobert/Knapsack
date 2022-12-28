@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class GreedyAlgoBehaviour : AlgoBehaviour
 {
-    public override void StartAlgorithm(Item[] items, int maxWeight, out Item[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
+    public override void StartAlgorithm(object[] items, int maxWeight, out object[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
     {
         _maximumWeight = maxWeight;
 
         CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Starting, items);
 
         // Sort Items by Value to Weight Ratio
-        SortItemsByValueToWeightRatio(items);
+        SortItemsByValueToWeightRatio((Item[])items);
 
         // Get Most Valuable Items that don't exceed the weight limit
-        selectedItems = GetMostValuableItems(items);
+        selectedItems = GetMostValuableItems((Item[])items);
 
         // Get Total Value and Weight of Selected items
         int values = 0;

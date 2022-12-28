@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DynamicProgAlgoBehaviour
+public class DynamicProgAlgoBehaviour : AlgoBehaviour
 {
-    public void StartAlgorithm(ItemProperties[] items, int maxWeight, out HashSet<ItemProperties> selectedItems, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
+    public override void StartAlgorithm(object[] items, int maxWeight, out object[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
     {
+        var itemProps = (ItemProperties[])items;
+
         var matrix = new int[items.Length+1][];
         for (var i = 0; i < matrix.Length; ++i)
         {
             matrix[i] = new int[maxWeight+1];
         }
 
-		selectedItems = new HashSet<ItemProperties>();
+        var selectedItemsList = new List<ItemProperties>();
+        steps = null;
 
 		for (var itemIndex = 1; itemIndex <= items.Length; ++itemIndex)
         {
             for (var curCapacity = 1; curCapacity <= maxWeight; ++curCapacity)
             {
-                var curItem = items[itemIndex-1];
+                var curItem = itemProps[itemIndex-1];
 
                 if (curItem.weight <= curCapacity)
                 {
@@ -48,10 +51,29 @@ public class DynamicProgAlgoBehaviour
 
         selectedItemsTotalValue = matrix[items.Length][maxWeight];
 
+        var selectedItemsCapacity = maxWeight;
+        var selectedItemsValue = selectedItemsTotalValue;
+
+		for (var i = items.Length; i > 0 && selectedItemsValue > 0; --i)
+        {
+            if (selectedItemsValue == matrix[i-1][selectedItemsCapacity])
+            {
+                continue;
+            }
+
+            var curItem = itemProps[i-1];
+
+			selectedItemsList.Add(curItem);
+            selectedItemsCapacity -= curItem.weight;
+            selectedItemsValue -= curItem.value;
+		}
+
         selectedItemsTotalWeight = 0;
-		foreach (var item in selectedItems)
+		foreach (var item in selectedItemsList)
         {
             selectedItemsTotalWeight += item.weight;
 		}
+
+        selectedItems = selectedItemsList.ToArray();
 	}
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sprite
   m_EditorClassIdentifier: 
   Name: Sprite
-  Model: {fileID: 8411751700325751633, guid: bd3726ae2da4ce047a74bd52d8fbf7a7, type: 3}
+  Model: {fileID: 4452355768698030123, guid: 5fe51b936da02b24b956549a67eddd05, type: 3}
   Value: 4
   Weight: 9

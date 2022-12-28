@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wein
   m_EditorClassIdentifier: 
   Name: Wein
-  Model: {fileID: 7872548470375674961, guid: 1de8e8a2f69d94b438a5408aae14bd64, type: 3}
+  Model: {fileID: 1632089696741245505, guid: 005c0fe009197634a8961f9c666993f7, type: 3}
   Value: 7
   Weight: 8

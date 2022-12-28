@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cornflakes
   m_EditorClassIdentifier: 
   Name: Cornflakes
-  Model: {fileID: 6256758986707271591, guid: c14d1845fdf5bd7448cc1cca520348b1, type: 3}
+  Model: {fileID: 8963667570954318875, guid: 5c71d9ca9ded51248a34702c0bda8504, type: 3}
   Value: 2
   Weight: 5

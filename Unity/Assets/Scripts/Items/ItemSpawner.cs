@@ -143,13 +143,14 @@ public class ItemSpawner : MonoBehaviour
             }
         }
 
-		testDynProgrAlg.StartAlgorithm(itemProps, PlayerHUDController.Instance.GetKnapsackCapacity(), out var selectedItems, out var totalValue, out var totalWeight);
+		testDynProgrAlg.StartAlgorithm(itemProps, PlayerHUDController.Instance.GetKnapsackCapacity(), out var selectedItems, out var steps, out var totalValue, out var totalWeight);
         Debug.Log("Total Value: " + totalValue);
         Debug.Log("Total Weight: " + totalWeight);
-        
-        Debug.Log("Selected Items Count: " + selectedItems.Count);
 
-        foreach (var selItem in selectedItems)
+        var selectedItemProperties = (ItemProperties[])selectedItems;
+        Debug.Log("Selected Items Count: " + selectedItemProperties.Length);
+
+        foreach (var selItem in selectedItemProperties)
         {
             Debug.Log("Value: " + selItem.value + ", Weight: " + selItem.weight);
         }
