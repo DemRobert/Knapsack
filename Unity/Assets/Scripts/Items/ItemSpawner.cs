@@ -118,9 +118,13 @@ public class ItemSpawner : MonoBehaviour
             return;
         }
 
-        for (var i = 0; i < CountOfItemsToSpawn; ++i)
+		for (var i = 0; i < CountOfItemsToSpawn; ++i)
         {
-            SpawnItem(spawnPoints[i]);
+            var nextSpawnPointIndex = (int)(Random.value*spawnPoints.Count - 0.01f);
+            var nextSpawnPoint = spawnPoints[nextSpawnPointIndex];
+            spawnPoints.Remove(nextSpawnPoint);
+
+            SpawnItem(nextSpawnPoint);
 		}
 
         // Test

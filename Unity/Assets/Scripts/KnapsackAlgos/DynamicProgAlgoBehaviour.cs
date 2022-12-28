@@ -15,7 +15,6 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
             matrix[i] = new int[maxWeight+1];
         }
 
-        var selectedItemsList = new List<ItemProperties>();
         steps = null;
 
 		for (var itemIndex = 1; itemIndex <= items.Length; ++itemIndex)
@@ -54,6 +53,7 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
         var selectedItemsCapacity = maxWeight;
         var selectedItemsValue = selectedItemsTotalValue;
 
+		var selectedItemsList = new List<ItemProperties>();
 		for (var i = items.Length; i > 0 && selectedItemsValue > 0; --i)
         {
             if (selectedItemsValue == matrix[i-1][selectedItemsCapacity])
