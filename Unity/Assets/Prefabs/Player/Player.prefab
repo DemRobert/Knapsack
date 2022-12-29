@@ -1086,7 +1086,7 @@ MonoBehaviour:
   PauseMenu: {fileID: 4560410468501820559}
   PhysicsRayCastLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
 --- !u!1 &6224674885518861349
 GameObject:
   m_ObjectHideFlags: 0

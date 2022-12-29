@@ -24,6 +24,7 @@ public class PlayerHUDController : MonoBehaviour
 	public LayerMask PhysicsRayCastLayer;
 	private bool m_IsCollidingWithItem;
 	private bool m_HasRecentlyCollidedWithItem;
+	private GameObject m_CurOutlinedObject;
 
 	private void Awake()
 	{
@@ -118,6 +119,18 @@ public class PlayerHUDController : MonoBehaviour
 				if (outline != null)
 				{
 					outline.OutlineColor = Color.white;
+					// If we hovered onto another Item without touchin any other Object in the Scene,
+					// we have to manually disable the Outline of the "old" Item which was highlighted
+					if (m_CurOutlinedObject != null && m_CurOutlinedObject != colliderGameObject)
+					{
+						var outlineToDisable = GetComponentFromParent<Outline>(m_CurOutlinedObject.transform);
+						if (outlineToDisable != null)
+						{
+							outlineToDisable.OutlineColor = Color.clear;
+						}
+					}
+
+					m_CurOutlinedObject = colliderGameObject;
 				}
 
 				if (Input.GetMouseButtonDown(0))
@@ -137,11 +150,13 @@ public class PlayerHUDController : MonoBehaviour
 			else
 			{
 				m_IsCollidingWithItem = false;
+				m_CurOutlinedObject = null;
 			}
 		}
 		else
 		{
 			m_IsCollidingWithItem = false;
+			m_CurOutlinedObject = null;
 		}
 
 		if (m_HasRecentlyCollidedWithItem && !m_IsCollidingWithItem)
