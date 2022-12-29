@@ -156,7 +156,8 @@ MonoBehaviour:
   ItemPrefabs: []
   ConsiderPrioritySpawnPoints: 0
   CountOfItemsToSpawn: 5
-  SpawnPoints: []
+  SpawnPoints:
+  - {fileID: 0}
   PrioritySpawnPoints: []
   SignPrefab: {fileID: 1973244070696727318, guid: 3b9140cbd94783b4297b13b721517655, type: 3}
   SignParentObject: {fileID: 0}
@@ -178,8 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventSystem: {fileID: 718406581}
-  GameMode: 2
-  AlgoType: 0
 --- !u!4 &390881145
 Transform:
   m_ObjectHideFlags: 0
@@ -643,6 +642,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3633849546934769006, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3722245492422850731, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -663,6 +666,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 4054855848421935625, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1990721912}
     - target: {fileID: 4058411931802739470, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -1085,3 +1092,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+--- !u!1 &1990721912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3633849546934769006, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+  m_PrefabInstance: {fileID: 1510923620}
+  m_PrefabAsset: {fileID: 0}
