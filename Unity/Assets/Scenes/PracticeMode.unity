@@ -153,14 +153,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665e709184b734e44b83ef1fc780cd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPrefabs: []
+  ItemPrefabs:
+  - {fileID: 11400000, guid: ead99b837184b7a4996fc3cc9b188897, type: 2}
+  - {fileID: 11400000, guid: 779c3b65fb900a64a9bd8aa767457efc, type: 2}
+  - {fileID: 11400000, guid: 71a9157a624d1bc4998e0d4737507f11, type: 2}
+  - {fileID: 11400000, guid: 195630abba4f76e4b933b86109a11576, type: 2}
+  - {fileID: 11400000, guid: cf24e6e51a2e454489ab00f8c04da70a, type: 2}
+  - {fileID: 11400000, guid: 27014ac0598055448b1149bb064d2732, type: 2}
+  - {fileID: 11400000, guid: 135a8d43b194ab947851fb1bba9f49e7, type: 2}
+  - {fileID: 11400000, guid: 4e536a6bb8cb8b847b803c3182a63a26, type: 2}
+  - {fileID: 11400000, guid: f7343af5abbcac74f93028ef1ef0a79d, type: 2}
+  - {fileID: 11400000, guid: ebf4a41968371fb438d484af323e4ad1, type: 2}
   ConsiderPrioritySpawnPoints: 0
   CountOfItemsToSpawn: 5
   SpawnPoints:
   - {fileID: 0}
   PrioritySpawnPoints: []
   SignPrefab: {fileID: 1973244070696727318, guid: 3b9140cbd94783b4297b13b721517655, type: 3}
-  SignParentObject: {fileID: 0}
+  SignParentObject: {fileID: 581338743}
   AddItemImage: {fileID: 21300000, guid: ada0c156e34c0ab468e9242d4d8831d7, type: 3}
   RemoveItemImage: {fileID: 21300000, guid: b23354083ae08534c8bb2296404843bc, type: 3}
   AddItemMenu: {fileID: 2892154541541819130, guid: 01a6b5a483995664e8a008ab03c9b5c3, type: 3}
@@ -195,6 +205,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &581338743 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1752480878, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+  m_PrefabInstance: {fileID: 1510923620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &718406578
 GameObject:
   m_ObjectHideFlags: 0

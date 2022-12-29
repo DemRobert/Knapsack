@@ -97,7 +97,7 @@ public class ItemSpawner : MonoBehaviour
 			Debug.Log("Value: " + selItem.value + ", Weight: " + selItem.weight);
 		}
 
-		DynamicProgrammingSolver.Instance.Solve(testDynProgrAlg);
+		//DynamicProgrammingSolver.Instance.Solve(testDynProgrAlg);
     }
 
     private void CollectSpawnPoints()
