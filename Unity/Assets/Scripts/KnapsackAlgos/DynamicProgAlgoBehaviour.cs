@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DynamicProgAlgoBehaviour : AlgoBehaviour
 {
+    public ItemProperties[] SelectedItems;
+
     public override void StartAlgorithm(object[] items, int maxWeight, out object[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
     {
         var itemProps = (ItemProperties[])items;
@@ -74,6 +76,7 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
             selectedItemsTotalWeight += item.weight;
 		}
 
-        selectedItems = selectedItemsList.ToArray();
+		SelectedItems = selectedItemsList.ToArray();
+        selectedItems = SelectedItems;
 	}
 }

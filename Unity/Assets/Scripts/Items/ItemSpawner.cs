@@ -65,7 +65,39 @@ public class ItemSpawner : MonoBehaviour
 		SpawnItems();
         SpawnSigns();
 
-        //DynamicProgrammingSolver.Instance.Solve();
+		// Test
+		var testDynProgrAlg = new DynamicProgAlgoBehaviour();
+
+		var itemProps = new ItemProperties[m_Items.Count];
+		for (var i = 0; i < itemProps.Length; ++i)
+		{
+			var curItemPropsComp = PlayerHUDController.GetComponentFromParent<ItemProperties>(m_Items[i].transform);
+
+			if (curItemPropsComp != null)
+			{
+				itemProps[i] = curItemPropsComp;
+			}
+			else
+			{
+				Debug.Log("Couldn't Test Dynamic Progr Alg. because unable to obtain the Item Properties Components.");
+
+				return;
+			}
+		}
+
+		testDynProgrAlg.StartAlgorithm(itemProps, PlayerHUDController.Instance.GetKnapsackCapacity(), out var selectedItems, out var steps, out var totalValue, out var totalWeight);
+		Debug.Log("Total Value: " + totalValue);
+		Debug.Log("Total Weight: " + totalWeight);
+
+		var selectedItemProperties = (ItemProperties[])selectedItems;
+		Debug.Log("Selected Items Count: " + selectedItemProperties.Length);
+
+		foreach (var selItem in selectedItemProperties)
+		{
+			Debug.Log("Value: " + selItem.value + ", Weight: " + selItem.weight);
+		}
+
+		DynamicProgrammingSolver.Instance.Solve(testDynProgrAlg);
     }
 
     private void CollectSpawnPoints()
@@ -128,38 +160,6 @@ public class ItemSpawner : MonoBehaviour
 
             SpawnItem(nextSpawnPoint);
 		}
-
-        // Test
-        var testDynProgrAlg = new DynamicProgAlgoBehaviour();
-
-        var itemProps = new ItemProperties[m_Items.Count];
-        for (var i = 0; i < itemProps.Length; ++i)
-        {
-            var curItemPropsComp = PlayerHUDController.GetComponentFromParent<ItemProperties>(m_Items[i].transform);
-
-			if (curItemPropsComp != null)
-            {
-                itemProps[i] = curItemPropsComp;
-            }
-            else
-            {
-                Debug.Log("Couldn't Test Dynamic Progr Alg. because unable to obtain the Item Properties Components.");
-
-                return;
-            }
-        }
-
-		testDynProgrAlg.StartAlgorithm(itemProps, PlayerHUDController.Instance.GetKnapsackCapacity(), out var selectedItems, out var steps, out var totalValue, out var totalWeight);
-        Debug.Log("Total Value: " + totalValue);
-        Debug.Log("Total Weight: " + totalWeight);
-
-        var selectedItemProperties = (ItemProperties[])selectedItems;
-        Debug.Log("Selected Items Count: " + selectedItemProperties.Length);
-
-        foreach (var selItem in selectedItemProperties)
-        {
-            Debug.Log("Value: " + selItem.value + ", Weight: " + selItem.weight);
-        }
 	}
 
     private void SetItemTagForChildren(Transform parent)

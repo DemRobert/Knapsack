@@ -235,7 +235,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7343af5abbcac74f93028ef1ef0a79d, type: 2}
   - {fileID: 11400000, guid: ebf4a41968371fb438d484af323e4ad1, type: 2}
   ConsiderPrioritySpawnPoints: 0
-  CountOfItemsToSpawn: 9
+  CountOfItemsToSpawn: 18
   SpawnPoints: []
   PrioritySpawnPoints: []
   SignPrefab: {fileID: 1973244070696727318, guid: 3b9140cbd94783b4297b13b721517655, type: 3}
@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 749653003815127087, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: TextPrefab
+      value: 
+      objectReference: {fileID: 2571139401487081333, guid: bbf28303d9f637a47ab07ec6a1a41e81, type: 3}
     - target: {fileID: 783661884918595136, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -892,6 +896,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5647886119369901094, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5680408235457805712, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -1007,6 +1015,18 @@ PrefabInstance:
     - target: {fileID: 6751772249857841404, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851629376599423827, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851629376599423827, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851629376599423827, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942858155985382612, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_StaticEditorFlags
