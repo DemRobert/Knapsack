@@ -64,6 +64,8 @@ public class ItemSpawner : MonoBehaviour
 
 		SpawnItems();
         SpawnSigns();
+
+        DynamicProgrammingSolver.Instance.Solve();
     }
 
     private void CollectSpawnPoints()
