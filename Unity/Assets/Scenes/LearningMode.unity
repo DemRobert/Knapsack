@@ -701,21 +701,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3035087625121774784, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: isGlobal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3035087625121774784, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3035087625121774784, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3035087625121774784, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b27cffc9fec3b14bbe46b2f0aec1058, type: 2}
     - target: {fileID: 480246133, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 5.6e-44
+      value: 3.4117844e+13
       objectReference: {fileID: 0}
     - target: {fileID: 480246133, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 1.05e-43
       objectReference: {fileID: 0}
     - target: {fileID: 480246133, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 2.6562857e+20
       objectReference: {fileID: 0}
     - target: {fileID: 480246133, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 1.0691825e-38
       objectReference: {fileID: 0}
     - target: {fileID: 749653003815127087, guid: 679ae5eb084fc8f499845e684f8a4afd, type: 3}
       propertyPath: TextPrefab
