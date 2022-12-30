@@ -7,7 +7,16 @@ public class DynamicProgAlgoStep : AlgoStep
     // Mögliche Operationen
     public enum DynamicAlgoOperations
     {
-        ONE
+        NEW_CELL,
+
+        COMPARE_WEIGHT01,
+        COMPARE_WEIGHT02,
+        COMPARE_WEIGHT03,
+
+        HIGHLIGHT_BEST_OPTION,
+        COMPARE_VALUES,
+
+        END
     }
 
     public DynamicAlgoOperations Operation { get; private set; }

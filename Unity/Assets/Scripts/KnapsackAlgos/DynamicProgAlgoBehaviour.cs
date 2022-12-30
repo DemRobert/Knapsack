@@ -28,13 +28,26 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
             {
                 var curItem = Items[itemIndex-1];
 
-				if (curItem.weight <= curCapacity)
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.NEW_CELL, null, curCapacity, itemIndex-1);
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT01, null, curCapacity, itemIndex-1);
+
+                var isItemOk = curItem.weight <= curCapacity;
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT02, isItemOk, curCapacity, itemIndex-1);
+
+                var withCurItemOldCapacity = curCapacity - curItem.weight;
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT03, withCurItemOldCapacity, curCapacity, itemIndex-1);
+
+				if (isItemOk)
                 {
                     var valueWithoutCurItem = matrix[itemIndex-1][curCapacity];
-                    var valueWithCurItem = matrix[itemIndex-1][curCapacity - curItem.weight] + curItem.value;
+                    var valueWithCurItem = matrix[itemIndex-1][withCurItemOldCapacity] + curItem.value;
 
-                    // Falls wir einen besseren Wert mit dem aktuellen Item erreichen
-                    if (valueWithCurItem > valueWithoutCurItem)
+                    var isBetterWithCurItem = valueWithCurItem > valueWithoutCurItem;
+					CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.HIGHLIGHT_BEST_OPTION, isBetterWithCurItem, curCapacity, itemIndex-1);
+					CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_VALUES, isBetterWithCurItem, curCapacity, itemIndex-1);
+
+					// Falls wir einen besseren Wert mit dem aktuellen Item erreichen
+					if (isBetterWithCurItem)
                     {
                         matrix[itemIndex][curCapacity] = valueWithCurItem;
 					}
@@ -48,12 +61,14 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
 				// Wert, den wir eine Stufe zuvor (ohne dieses Item) erreicht haben
 				else
 				{
-                    matrix[itemIndex][curCapacity] = matrix[itemIndex-1][curCapacity];
+                    var value = matrix[itemIndex-1][curCapacity];
+					CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_VALUES, value, curCapacity, itemIndex-1);
+					matrix[itemIndex][curCapacity] = value;
 				}
 
-				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.ONE, matrix[itemIndex][curCapacity], curCapacity, itemIndex-1);
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.END, null, curCapacity, itemIndex-1);
 			}
-        }
+		}
 
         selectedItemsTotalValue = matrix[items.Length][maxWeight];
 
