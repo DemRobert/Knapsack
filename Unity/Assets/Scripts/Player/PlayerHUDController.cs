@@ -48,6 +48,11 @@ public class PlayerHUDController : MonoBehaviour
 
 	private void Update()
 	{
+		if (IsPaused())
+		{
+			return;
+		}
+
 		var eventSystem = GameManager.Instance.EventSystem;
 
 		var isCollidingWithUIStuff = false;
