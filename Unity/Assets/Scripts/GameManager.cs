@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
         GameMode = MainMenuManager.SelectedGameMode;
         AlgoType = MainMenuManager.SelectedAlgorithm;
     }
+
+    // Für Commit
 }
 public enum GameModes
 {
