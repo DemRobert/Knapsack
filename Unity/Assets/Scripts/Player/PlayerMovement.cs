@@ -12,11 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_playerRigidbody;
     private PlayerInputActions m_playerControls;
     private InputAction m_movementInputAction;
+    private Animator m_animator;
 
     private void Awake()
     {
         m_playerRigidbody = GetComponent<Rigidbody>();
         m_playerControls = new PlayerInputActions();
+        m_animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        m_movementDirection = m_movementInputAction.ReadValue<Vector2>();
+        m_movementDirection = m_movementInputAction.ReadValue<Vector2>();        
     }
 
     private void FixedUpdate()
@@ -44,5 +46,8 @@ public class PlayerMovement : MonoBehaviour
         m_playerRigidbody.velocity = transform.right * m_movementSpeed * m_movementDirection.x +
                                     Vector3.up * m_playerRigidbody.velocity.y +
                                     transform.forward * m_movementSpeed * m_movementDirection.y;
+
+        // Set Animator Speed
+        m_animator.SetFloat("Speed", m_playerRigidbody.velocity.magnitude / m_movementSpeed);
     }
 }
