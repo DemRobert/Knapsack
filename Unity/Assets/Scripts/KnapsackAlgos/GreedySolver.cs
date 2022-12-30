@@ -351,7 +351,7 @@ public class GreedySolver : MonoBehaviour
 
     private ItemProperties[] GetItems()
     {
-        return m_Algorithm.Items;
+        return null;
     }
 
     private List<AlgoStep> GetSteps()

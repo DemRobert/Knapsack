@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public EventSystem EventSystem;
     public GameModes GameMode { get; private set; }
-    public AlgoTypes AlgoType { get; private set; }
+    public AlgoTypes AlgoType { get; set; }
 
 	private void Awake()
     {

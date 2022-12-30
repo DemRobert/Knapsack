@@ -255,10 +255,12 @@ public class PlayerHUDController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			if(GameManager.Instance.AlgoType==AlgoTypes.Dynamic)
+			GameManager.Instance.AlgoType = AlgoTypes.Dynamic;
+
+			if (GameManager.Instance.AlgoType==AlgoTypes.Dynamic)
 			{
                 m_DynamicProgrAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
-                DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
+				DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
             }	
 			else if(GameManager.Instance.AlgoType == AlgoTypes.Greedy)
 			{

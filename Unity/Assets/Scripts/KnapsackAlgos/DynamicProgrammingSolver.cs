@@ -92,10 +92,13 @@ public class DynamicProgrammingSolver : MonoBehaviour
 			}
 			else
 			{
-				var stepToReverse = m_ExecutedSteps.Pop();
-				ReverseStep(stepToReverse);
+				if (m_ExecutedSteps.Count > 0)
+				{
+					var stepToReverse = m_ExecutedSteps.Pop();
+					ReverseStep(stepToReverse);
 
-				m_RemainingSteps.Insert(0, stepToReverse);
+					m_RemainingSteps.Insert(0, stepToReverse);
+				}
 			}
 		}
 		else if (Input.GetKeyDown(KeyCode.L))
@@ -197,13 +200,6 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		return result;
 	}
 
-	private void ReverseStep(DynamicProgAlgoStep step)
-	{
-		if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.END)
-		{
-		}
-	}
-
 	private void ExecuteStep()
 	{
 		if (m_RemainingSteps.Count <= 0)
@@ -217,17 +213,29 @@ public class DynamicProgrammingSolver : MonoBehaviour
 
 		if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.NEW_CELL)
 		{
+			var oldItemTableTextColors = new Dictionary<TextMeshProUGUI, Color>();
+			var lastHighlightedItemTableColumn = curCapacity == 1 ? curItemIndex-1 : curItemIndex;
+
+			if (lastHighlightedItemTableColumn >= 0)
+			{
+				for (var i = 0; i < 3; ++i)
+				{
+					var text = GetText(GetItemTable(), lastHighlightedItemTableColumn+1, i);
+					oldItemTableTextColors.Add(text, text.color);
+				}
+			}
+
 			HighlightItemTableItem(curItemIndex);
 			HighlightMainTableCurCapacityAndIndex(curCapacity, curItemIndex);
 
-			m_ExecutedStepsInfo.Add(new object[]{curCapacity, curItemIndex});
+			m_ExecutedStepsInfo.Add(new object[]{curCapacity, curItemIndex, oldItemTableTextColors});
 		}
 		else if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT01)
 		{
 			var curItemWeightText = GetText(GetItemTable(), curItemIndex+1, 2);
 			curItemWeightText.color = m_TextColorHighlightOrange;
 
-			m_ExecutedStepsInfo.Add(curItemIndex);
+			m_ExecutedStepsInfo.Add(curItemWeightText);
 		}
 		else if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT02)
 		{
@@ -236,21 +244,23 @@ public class DynamicProgrammingSolver : MonoBehaviour
 
 			curItemWeightText.color = isItemOk ? m_TextColorHighlightGreen : m_TextColorHighlightRed;
 
-			m_ExecutedStepsInfo.Add(curItemIndex);
+			m_ExecutedStepsInfo.Add(curItemWeightText);
 		}
 		else if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT03)
 		{
 			// Skip the current Step if we are in the first Row (there is no Row above)
 			if (curItemIndex == 0)
 			{
+				m_ExecutedStepsInfo.Add("NULL");
+
 				return;
 			}
 
-			var textsForReversing = new TextMeshProUGUI[3];
+			var oldTextColors = new Dictionary<TextMeshProUGUI, Color>();
 
 			var mainTable = GetMainTable();
 			var textCellWithoutCurItem = GetText(mainTable, curCapacity, curItemIndex);
-			textsForReversing[0] = textCellWithoutCurItem;
+			oldTextColors.Add(textCellWithoutCurItem, textCellWithoutCurItem.color);
 
 			var curItem = GetItems()[curItemIndex];
 			// If the current Item doesn't fit because its Weight is too big
@@ -265,18 +275,18 @@ public class DynamicProgrammingSolver : MonoBehaviour
 				if (withCurItemOldCapacity > 0)
 				{
 					var textCellWithCurItem = GetText(mainTable, withCurItemOldCapacity, curItemIndex);
-					textsForReversing[1] = textCellWithCurItem;
+					oldTextColors.Add(textCellWithCurItem, textCellWithCurItem.color);
 					textCellWithCurItem.color = m_TextColorHighlightOrange2;
 				}
 
 				var textCurValueItemTable = GetText(GetItemTable(), curItemIndex+1, 1);
-				textsForReversing[2] = textCurValueItemTable;
+				oldTextColors.Add(textCurValueItemTable, textCurValueItemTable.color);
 				textCurValueItemTable.color = m_TextColorHighlightOrange2;
 
 				textCellWithoutCurItem.color = m_TextColorHighlightOrange;
 			}
 
-			m_ExecutedStepsInfo.Add(textsForReversing);
+			m_ExecutedStepsInfo.Add(oldTextColors);
 		}
 		else if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.HIGHLIGHT_BEST_OPTION)
 		{
@@ -402,10 +412,118 @@ public class DynamicProgrammingSolver : MonoBehaviour
 				if (indexCellWithCurItem > 0)
 				{
 					var textCellWithCurItem = GetText(mainTable, indexCellWithCurItem, curItemIndex);
+					oldTextColors.Add(textCellWithCurItem, textCellWithCurItem.color);
 					textCellWithCurItem.color = m_DefaultTextColor;
 				}
 			}
+
+			m_ExecutedStepsInfo.Add(oldTextColors);
 		}
+	}
+
+	private void ReverseStep(DynamicProgAlgoStep step)
+	{
+		var stepInfo = m_ExecutedStepsInfo[m_ExecutedStepsInfo.Count-1];
+		if (stepInfo.Equals("NULL"))
+		{
+			m_ExecutedStepsInfo.RemoveAt(m_ExecutedStepsInfo.Count-1);
+			//Debug.Log("BS");
+
+			return;
+		}
+
+		if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.END)
+		{
+			var oldTextColors = (Dictionary<TextMeshProUGUI, Color>)stepInfo;
+			foreach (var textPair in oldTextColors)
+			{
+				textPair.Key.color = textPair.Value;
+			}
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_VALUES)
+		{
+			var curCapacity = (int)((object[])stepInfo)[0];
+			var curItemIndex = (int)((object[])stepInfo)[1];
+
+			var text = GetText(GetMainTable(), curCapacity, curItemIndex+1);
+			Destroy(text.gameObject);
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.HIGHLIGHT_BEST_OPTION)
+		{
+			var oldTextColors = (Dictionary<TextMeshProUGUI, Color>)stepInfo;
+			foreach (var textPair in oldTextColors)
+			{
+				textPair.Key.color = textPair.Value;
+			}
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT03)
+		{
+			var oldTextColors = (Dictionary<TextMeshProUGUI, Color>)stepInfo;
+			foreach (var textPair in oldTextColors)
+			{
+				textPair.Key.color = textPair.Value;
+			}
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT02)
+		{
+			var text = (TextMeshProUGUI)stepInfo;
+			text.color = m_TextColorHighlightOrange;
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT01)
+		{
+			var text = (TextMeshProUGUI)stepInfo;
+			text.color = m_TextColorHighlightBlue;
+		}
+		else if (step.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.NEW_CELL)
+		{
+			var curCapacity = (int)((object[])stepInfo)[0];
+			var curItemIndex = (int)((object[])stepInfo)[1];
+			var oldItemTableTexts = (Dictionary<TextMeshProUGUI, Color>)((object[])stepInfo)[2];
+
+			var mainTable = GetMainTable();
+			var itemTable = GetItemTable();
+
+			// Dehighlighting highlighted Texts
+			var textsToDehighlight = new TextMeshProUGUI[]
+			{
+				// Item Table
+				GetText(itemTable, curItemIndex+1, 0),
+				GetText(itemTable, curItemIndex+1, 1),
+				GetText(itemTable, curItemIndex+1, 2),
+
+				// Main Table
+				GetText(mainTable, 0, curItemIndex+1),
+				GetText(mainTable, curCapacity, 0)
+			};
+
+			foreach (var text in textsToDehighlight)
+			{
+				text.color = m_DefaultTextColor;
+			}
+
+			var isFirstCell = curCapacity == 1 && curItemIndex == 0;
+			var lastCapacity = curCapacity == 1 ? GetCapacity() : curCapacity-1;
+			var lastItemIndex = lastCapacity == GetCapacity() ? curItemIndex-1 : curItemIndex;
+
+			// Rehighlighting Texts that were highlighted before
+			if (!isFirstCell)
+			{
+				// Main Table
+				var capacityText = GetText(mainTable, lastCapacity, 0);
+				capacityText.color = m_TextColorHighlightBlue;
+
+				var itemIndexText = GetText(mainTable, 0, lastItemIndex+1);
+				itemIndexText.color = m_TextColorHighlightBlue;
+
+				// Item Table
+				foreach (var lastText in oldItemTableTexts)
+				{
+					lastText.Key.color = lastText.Value;
+				}
+			}
+		}
+
+		m_ExecutedStepsInfo.RemoveAt(m_ExecutedStepsInfo.Count-1);
 	}
 
 	private List<GameObject> GetTextObjects()
