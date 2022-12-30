@@ -37,6 +37,9 @@ public class DynamicProgrammingSolver : MonoBehaviour
 	// J -> -0.2, L -> +0.2; Range = [0.2, 2.0]
 	private float m_StepExecutionSpeed = 1.0f;
 
+	private Color m_DefaultTextColor = new(1.0f, 1.0f, 1.0f, 1.0f);
+	private Color m_HighlightedTextColor = new(0.8f, 0.0f, 0.4f, 1.0f);
+
 	private void Awake()
 	{
 		Instance = this;
@@ -78,6 +81,69 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		}
 	}
 
+	private void HighlightItemTableItem(int itemIndex)
+	{
+		var itemTable = GetItemTable();
+		for (var curCol = 1; curCol < itemTable.CountColumns; ++curCol)
+		{
+			var texts = new TextMeshProUGUI[]
+			{
+				GetText(itemTable, curCol, 0),
+				GetText(itemTable, curCol, 1),
+				GetText(itemTable, curCol, 2)
+			};
+
+			if (itemIndex == curCol-1)
+			{
+				foreach (var text in texts)
+				{
+					text.color = m_HighlightedTextColor;
+				}
+			}
+			else
+			{
+				foreach (var text in texts)
+				{
+					text.color = m_DefaultTextColor;
+				}
+			}
+		}
+	}
+
+	private void HighlightMainTableCurCapacityAndIndex(int curCapacity, int itemIndex)
+	{
+		var mainTable = GetMainTable();
+
+		for (var i = 1; i <= GetCapacity(); ++i)
+		{
+			var capacityText = GetText(mainTable, i, 0);
+			if (i == curCapacity)
+			{
+				capacityText.color = m_HighlightedTextColor;
+			}
+			else
+			{
+				capacityText.color = m_DefaultTextColor;
+			}
+		}
+
+		if (curCapacity == 1)
+		{
+			for (var i = 1; i <= GetItems().Length; ++i)
+			{
+				var indexText = GetText(mainTable, 0, i);
+				if (i == (itemIndex+1))
+				{
+					indexText.color = m_HighlightedTextColor;
+				}
+				else
+				{
+					indexText.color = m_DefaultTextColor;
+				}
+			}
+		}
+	}
+
 	private void ExecuteStep()
 	{
 		if (m_RemainingSteps.Count <= 0)
@@ -89,7 +155,53 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.ONE)
 		{
 			DrawItemValue((int)nextStep.Values, nextStep.CurCapacity, nextStep.CurItemIndex);
+
+			HighlightItemTableItem(nextStep.CurItemIndex);
+			HighlightMainTableCurCapacityAndIndex(nextStep.CurCapacity, nextStep.CurItemIndex);
 		}
+	}
+
+	private List<GameObject> GetTextObjects()
+	{
+		var result = new List<GameObject>(transform.childCount - 1);
+		for (var i = 0; i < transform.childCount; ++i)
+		{
+			var curChild = transform.GetChild(i);
+			if (curChild.name.Equals("Background"))
+			{
+				continue;
+			}
+
+			result.Add(curChild.gameObject);
+		}
+
+		return result;
+	}
+
+	private bool GetTextIsEqualPos(int x, int calcX, int y, int calcY)
+	{
+		return x >= (calcX-5) && x <= (calcX+5) &&
+			   y >= (calcY-5) && y <= (calcY+5);
+	}
+
+	private TextMeshProUGUI GetText(SolverTable table, int col, int row)
+	{
+		int calcTextX = table.StartX + col*table.WidthCell + table.WidthCell/2;
+		int calcTextY = table.EndY-table.HeightCell - row*table.HeightCell + table.HeightCell/2;
+
+		foreach (var textObj in GetTextObjects())
+		{
+			var rectTransform = textObj.GetComponent<RectTransform>();
+			var actualX = (int)(rectTransform.localPosition.x + m_ScreenWidth/2);
+			var actualY = (int)(rectTransform.localPosition.y + m_ScreenHeight/2);
+
+			if (GetTextIsEqualPos(actualX, calcTextX, actualY, calcTextY))
+			{
+				return textObj.GetComponent<TextMeshProUGUI>();
+			}
+		}
+
+		return null;
 	}
 
 	private void DrawItemValue(int value, int curCapacity, int itemIndex)
@@ -290,10 +402,5 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		PlayerHUD.SetActive(true);
 
 		m_Algorithm = null;
-	}
-
-	private bool IsEqual(float a, float b)
-	{
-		return Mathf.Abs(a - b) <= 0.0001f;
 	}
 }

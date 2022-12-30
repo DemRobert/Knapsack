@@ -20,6 +20,7 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
 
         //Debug.Log("Max Weight: " + maxWeight);
         //Debug.Log("Item Count: " + items.Length);
+        _steps.Clear();
 
 		for (var itemIndex = 1; itemIndex <= items.Length; ++itemIndex)
         {

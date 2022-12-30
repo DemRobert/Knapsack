@@ -35,7 +35,7 @@ public class PlayerHUDController : MonoBehaviour
 
 	private void Start()
 	{
-		SetKnapsackCapacity(10);
+		SetKnapsackCapacity(5);
 
 		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
 	}
