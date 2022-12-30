@@ -5,11 +5,21 @@ using UnityEngine;
 public class DynamicProgAlgoStep : AlgoStep
 {
     // Mögliche Operationen
-    public enum DynamicAlgoOperations { }
-    public DynamicAlgoOperations Operation { get; private set; }
-    public DynamicProgAlgoStep(DynamicAlgoOperations operation, object values)
+    public enum DynamicAlgoOperations
     {
-        this.Operation = operation;
-        this.Values = values;
+        ONE
     }
+
+    public DynamicAlgoOperations Operation { get; private set; }
+    public int CurCapacity;
+    public int CurItemIndex;
+
+    public DynamicProgAlgoStep(DynamicAlgoOperations operation, object ding, int curCapacity, int curItemIndex)
+    {
+        Operation = operation;
+        Values = ding;
+
+        CurCapacity = curCapacity;
+        CurItemIndex = curItemIndex;
+	}
 }

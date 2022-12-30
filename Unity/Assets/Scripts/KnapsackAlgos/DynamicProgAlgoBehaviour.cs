@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class DynamicProgAlgoBehaviour : AlgoBehaviour
 {
+    public ItemProperties[] Items;
     public ItemProperties[] SelectedItems;
 
     public override void StartAlgorithm(object[] items, int maxWeight, out object[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
     {
-        var itemProps = (ItemProperties[])items;
+		Items = (ItemProperties[])items;
 
         var matrix = new int[items.Length+1][];
         for (var i = 0; i < matrix.Length; ++i)
@@ -17,15 +18,16 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
             matrix[i] = new int[maxWeight+1];
         }
 
-        steps = null;
+        //Debug.Log("Max Weight: " + maxWeight);
+        //Debug.Log("Item Count: " + items.Length);
 
 		for (var itemIndex = 1; itemIndex <= items.Length; ++itemIndex)
         {
             for (var curCapacity = 1; curCapacity <= maxWeight; ++curCapacity)
             {
-                var curItem = itemProps[itemIndex-1];
+                var curItem = Items[itemIndex-1];
 
-                if (curItem.weight <= curCapacity)
+				if (curItem.weight <= curCapacity)
                 {
                     var valueWithoutCurItem = matrix[itemIndex-1][curCapacity];
                     var valueWithCurItem = matrix[itemIndex-1][curCapacity - curItem.weight] + curItem.value;
@@ -47,7 +49,9 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
 				{
                     matrix[itemIndex][curCapacity] = matrix[itemIndex-1][curCapacity];
 				}
-            }
+
+				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.ONE, matrix[itemIndex][curCapacity], curCapacity, itemIndex-1);
+			}
         }
 
         selectedItemsTotalValue = matrix[items.Length][maxWeight];
@@ -63,7 +67,7 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
                 continue;
             }
 
-            var curItem = itemProps[i-1];
+            var curItem = Items[i-1];
 
 			selectedItemsList.Add(curItem);
             selectedItemsCapacity -= curItem.weight;
@@ -78,5 +82,14 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
 
 		SelectedItems = selectedItemsList.ToArray();
         selectedItems = SelectedItems;
+
+        steps = _steps.ToArray();
+	}
+
+	private void CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations operation, object ding, int curCapacity, int curItemIndex)
+	{
+		var algoStep = new DynamicProgAlgoStep(operation, ding, curCapacity, curItemIndex);
+		// Add Step to List of Steps
+		_steps.Add(algoStep);
 	}
 }

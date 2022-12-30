@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +26,16 @@ public class DynamicProgrammingSolver : MonoBehaviour
 	// Wie viel Prozent der gesamten Bildschirmbreite eine Tabelle einnehmen soll
 	private float m_TableWidthPercentage = 0.8f;
 
+	private List<SolverTable> m_Tables = new();
+
 	private DynamicProgAlgoBehaviour m_Algorithm;
+	private Queue<DynamicProgAlgoStep> m_RemainingSteps = new();
+	//private Queue<DynamicProgAlgoStep> m_ExecutedSteps = new();
+
+	private float m_StepExecutionCounter;
+	// One Step per Second by default; Can be adjusted by pressing J or L
+	// J -> -0.2, L -> +0.2; Range = [0.2, 2.0]
+	private float m_StepExecutionSpeed = 1.0f;
 
 	private void Awake()
 	{
@@ -40,6 +48,60 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		m_ScreenHeight = (int)rect.rect.height;
 
 		m_Texture = new(m_ScreenWidth, m_ScreenHeight);
+
+		m_BackgroundAndLinesImageComp = BackgroundAndLines.GetComponent<RawImage>();
+		m_BackgroundAndLinesImageComp.texture = m_Texture;
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			SolvingDone();
+		}
+
+		if (Input.GetKeyDown(KeyCode.J) && m_StepExecutionSpeed < 1.95f)
+		{
+			m_StepExecutionSpeed += 0.2f;
+		}
+		else if (Input.GetKeyDown(KeyCode.L) && m_StepExecutionSpeed > 0.25f)
+		{
+			m_StepExecutionSpeed -= 0.2f;
+		}
+
+		m_StepExecutionCounter += Time.deltaTime;
+		// After 1 Second
+		if (m_StepExecutionCounter >= m_StepExecutionSpeed)
+		{
+			ExecuteStep();
+			m_StepExecutionCounter = 0.0f;
+		}
+	}
+
+	private void ExecuteStep()
+	{
+		if (m_RemainingSteps.Count <= 0)
+		{
+			return;
+		}
+
+		var nextStep = m_RemainingSteps.Dequeue();
+		if (nextStep.Operation == DynamicProgAlgoStep.DynamicAlgoOperations.ONE)
+		{
+			DrawItemValue((int)nextStep.Values, nextStep.CurCapacity, nextStep.CurItemIndex);
+		}
+	}
+
+	private void DrawItemValue(int value, int curCapacity, int itemIndex)
+	{
+		var itemTable = GetMainTable();
+		var width = itemTable.WidthCell;
+		var height = itemTable.HeightCell;
+
+		var x = itemTable.StartX + curCapacity*width;
+		var y = itemTable.EndY-(height*2) - itemIndex*height;
+
+		DrawText(value.ToString(), x, y, width, height);
 	}
 
 	private void ClearScreen()
@@ -51,28 +113,15 @@ public class DynamicProgrammingSolver : MonoBehaviour
 				m_Texture.SetPixel(x, y, m_ClearColor);
 			}
 		}
-	}
 
-	private void DrawTable(int countRows, int countColumns, int startX, int startY, int endX, int endY)
-	{
-		var tableWidth = endX - startX;
-		var tableHeight = endY - startY;
-
-		var widthColumn = tableWidth / (float)countColumns;
-		var heightRow = tableHeight / (float)countRows;
-
-		var vertX = (int)(startX + widthColumn);
-		for (var i = 0; i < (countColumns-1); ++i)
+		// Remove all Texts
+		for (var i = 0; i < transform.childCount; ++i)
 		{
-			DrawLine(vertX, startY, vertX, endY);
-			vertX += (int)widthColumn;
-		}
-
-		var horiY = (int)(startY + heightRow);
-		for (var i = 0; i < (countRows-1); ++i)
-		{
-			DrawLine(startX, horiY, endX, horiY);
-			horiY += (int)heightRow;
+			var child = transform.GetChild(i);
+			if (!child.name.Equals("Background"))
+			{
+				Destroy(child.gameObject);
+			}
 		}
 	}
 
@@ -89,7 +138,33 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		var startY = (int)(m_ScreenHeight * 0.05f);
 		var endY = (int)(m_ScreenHeight * 0.6f);
 
-		DrawTable(items.Length+1, capacity+1, startX, startY, endX, endY);
+		m_Tables.Add(new(items.Length+1, capacity+1, startX, startY, endX, endY));
+
+		var curTable = m_Tables[m_Tables.Count-1];
+		curTable.Render(m_Texture, m_LineColor);
+
+		var widthCell = curTable.WidthCell;
+		var heightCell = curTable.HeightCell;
+
+		// Drawing the Capacities (Column Names)
+		var curX = curTable.StartX + widthCell;
+		var y = curTable.EndY - heightCell;
+
+		for (var i = 1; i <= capacity; ++i)
+		{
+			DrawText(i.ToString(), curX, y, widthCell, heightCell);
+			curX += widthCell;
+		}
+
+		// Drawing the Item Indices (Row Names)
+		var x = curTable.StartX;
+		var curY = curTable.EndY - heightCell*2;
+
+		for (var i = 0; i < items.Length; ++i)
+		{
+			DrawText(i.ToString(), x, curY, widthCell, heightCell);
+			curY -= heightCell;
+		}
 	}
 
 	private void DrawItemTable()
@@ -104,8 +179,34 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		var startY = (int)(m_ScreenHeight * 0.65f);
 		var endY = (int)(m_ScreenHeight * 0.95f);
 
+		var countColumns = items.Length+1;
+		var countRows = 3;
+
 		// Rows -> ItemIndex, Value, Weight
-		DrawTable(3, items.Length+1, startX, startY, endX, endY);
+		m_Tables.Add(new(countRows, countColumns, startX, startY, endX, endY));
+
+		var curTable = m_Tables[m_Tables.Count-1];
+		curTable.Render(m_Texture, m_LineColor);
+
+		var widthCell = curTable.WidthCell;
+		var heightCell = curTable.HeightCell;
+
+		// Draw the Value(Col=0, Row=1) and Weight(Col=0, Row=2) Texts
+		DrawText("Value", startX, startY + heightCell, widthCell, heightCell);
+		DrawText("Weight", startX, startY, widthCell, heightCell);
+
+		var curX = startX + widthCell;
+		for (var i = 0; i < items.Length; ++i)
+		{
+			var curItem = items[i];
+
+			// From Bottom to Top in Table
+			DrawText(curItem.weight.ToString(), curX, startY, widthCell, heightCell);
+			DrawText(curItem.value.ToString(), curX, startY + heightCell, widthCell, heightCell);
+			DrawText(i.ToString(), curX, startY + heightCell*2, widthCell, heightCell);
+
+			curX += widthCell;
+		}
 	}
 
 	// x,y | the Position of the Bottom Left-Hand Corner of the Text
@@ -115,8 +216,8 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		var instance = Instantiate(TextPrefab, new(), TextPrefab.transform.rotation, transform);
 		instance.name = "Text";
 
-		x += width/2;
-		y += height/2;
+		x += width/2 - m_ScreenWidth/2;
+		y += height/2 - m_ScreenHeight/2;
 
 		var rectTransform = instance.GetComponent<RectTransform>();
 		rectTransform.localPosition = new(x, y);
@@ -133,15 +234,32 @@ public class DynamicProgrammingSolver : MonoBehaviour
 
 	private ItemProperties[] GetItems()
 	{
-		return m_Algorithm.SelectedItems;
+		return m_Algorithm.Items;
+	}
+
+	private List<AlgoStep> GetSteps()
+	{
+		return m_Algorithm.GetSteps();
+	}
+
+	private SolverTable GetMainTable()
+	{
+		return m_Tables[0];
+	}
+
+	private SolverTable GetItemTable()
+	{
+		return m_Tables[1];
 	}
 
 	public void Solve(DynamicProgAlgoBehaviour algorithm)
 	{
-		if (m_Algorithm == null)
+		if (m_Algorithm != null)
 		{
-			m_Algorithm = algorithm;
+			return;
 		}
+
+		m_Algorithm = algorithm;
 
 		// Disable the HUD Canvas but Enable the Background Image
 		PlayerHUD.SetActive(false);
@@ -152,52 +270,30 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		DrawMainTable();
 		DrawItemTable();
 
-		DrawText("Test", -m_ScreenWidth/2, -m_ScreenHeight/2, 100, 60);
+		//DrawText("Test", 0, 0, 100, 60);
 
 		m_Texture.Apply();
 
-		m_BackgroundAndLinesImageComp = BackgroundAndLines.GetComponent<RawImage>();
-		m_BackgroundAndLinesImageComp.texture = m_Texture;
+		foreach (var step in GetSteps())
+		{
+			m_RemainingSteps.Enqueue((DynamicProgAlgoStep)step);
+		}
+	}
 
-		// Solving done
-		//BackgroundAndLines.SetActive(false);
-		//PlayerHUD.SetActive(true);
+	public void SolvingDone()
+	{
+		m_RemainingSteps.Clear();
+		m_Tables.Clear();
+		ClearScreen();
+
+		BackgroundAndLines.SetActive(false);
+		PlayerHUD.SetActive(true);
+
+		m_Algorithm = null;
 	}
 
 	private bool IsEqual(float a, float b)
 	{
 		return Mathf.Abs(a - b) <= 0.0001f;
-	}
-
-	// Only straight Lines can be drawn
-	private void DrawLine(int lineStartX, int lineStartY, int lineEndX, int lineEndY)
-	{
-		// Vertical Line
-		if (lineStartX == lineEndX)
-		{
-			var startY = Mathf.Min(lineStartY, lineEndY);
-			var endY = Mathf.Max(lineStartY, lineEndY);
-
-			for (var y = startY; y <= endY; ++y)
-			{
-				m_Texture.SetPixel(lineStartX, y, m_LineColor);
-			}
-		}
-		// Horizontal Line
-		else if (lineStartY == lineEndY)
-		{
-			var startX = Mathf.Min(lineStartX, lineEndX);
-			var endX = Mathf.Max(lineStartX, lineEndX);
-
-			for (var x = startX; x <= endX; ++x)
-			{
-				m_Texture.SetPixel(x, lineStartY, m_LineColor);
-			}
-		}
-		// Neither Vertical nor Horizontal -> invalid
-		else
-		{
-			Debug.Log("DrawLine: Attempted to Draw non-straight Line.");
-		}
 	}
 }

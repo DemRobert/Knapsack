@@ -26,6 +26,8 @@ public class PlayerHUDController : MonoBehaviour
 	private bool m_HasRecentlyCollidedWithItem;
 	private GameObject m_CurOutlinedObject;
 
+	private DynamicProgAlgoBehaviour m_DynamicProgrAlgorithm = new();
+
 	private void Awake()
 	{
         Instance = this;
@@ -248,6 +250,12 @@ public class PlayerHUDController : MonoBehaviour
 		{
 			m_PlayerInventory.Maximized = !m_PlayerInventory.Maximized;
 			m_PlayerInventory.UpdateInventory();
+		}
+
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			m_DynamicProgrAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
+			DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
 		}
 	}
 
