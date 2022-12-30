@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -10,12 +11,12 @@ public class GreedyAlgoBehaviour : AlgoBehaviour
     {
         _maximumWeight = maxWeight;
 
-        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Starting, items);
+        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Starting, 0, _maximumWeight, 0, null, (ItemProperties[])items, null);
 
         // Sort Items by Value to Weight Ratio
         SortItemsByValueToWeightRatio((ItemProperties[])items);
 
-        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Sorting, items);
+        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Sorting, 0, _maximumWeight, 0, null, (ItemProperties[])items, null);
 
         // Get Most Valuable Items that don't exceed the weight limit
         selectedItems = GetMostValuableItems((ItemProperties[])items);
@@ -31,8 +32,7 @@ public class GreedyAlgoBehaviour : AlgoBehaviour
         selectedItemsTotalValue = values;
         selectedItemsTotalWeight = weights;
 
-        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Ending, selectedItems);
-
+        CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Ending, 0, _maximumWeight, 0, null, (ItemProperties[])items, (ItemProperties[])selectedItems);
         // Steps of Algorithm
         steps = _steps.ToArray();
     }
@@ -65,8 +65,7 @@ public class GreedyAlgoBehaviour : AlgoBehaviour
 
         for (int i = 0; i < items.Length; i++)
         {
-            CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Selecting, 
-                new GreedyAlgoStep.SelectionValues(totalItemWeight, _maximumWeight, items[i], selectedItems.ToArray()));
+            CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations.Selecting, totalItemWeight, _maximumWeight, i, items[i], items, selectedItems.ToArray());
 
             if (totalItemWeight == _maximumWeight)
                 break;
@@ -81,9 +80,9 @@ public class GreedyAlgoBehaviour : AlgoBehaviour
         return selectedItems.ToArray();
     }
 
-    private void CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations operation, object value)
+    private void CreateAlgoStep(GreedyAlgoStep.GreedyAlgoOperations operation, int currentWeight, int maxWeight, int currentIndex, ItemProperties currentItem, ItemProperties[] items, ItemProperties[] selectedItems)
     {
-        GreedyAlgoStep algoStep = new GreedyAlgoStep(operation, value);
+        GreedyAlgoStep algoStep = new GreedyAlgoStep(operation, currentWeight, maxWeight, currentIndex, currentItem, items, selectedItems);
         // Add Step to List of Steps
         _steps.Add(algoStep);
     }

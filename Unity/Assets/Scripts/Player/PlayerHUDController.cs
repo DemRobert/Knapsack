@@ -27,6 +27,7 @@ public class PlayerHUDController : MonoBehaviour
 	private GameObject m_CurOutlinedObject;
 
 	private DynamicProgAlgoBehaviour m_DynamicProgrAlgorithm = new();
+	private GreedyAlgoBehaviour m_GreedyAlgorithm = new();
 
 	private void Awake()
 	{
@@ -254,8 +255,16 @@ public class PlayerHUDController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			m_DynamicProgrAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
-			DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
+			if(GameManager.Instance.AlgoType==AlgoTypes.Dynamic)
+			{
+                m_DynamicProgrAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
+                DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
+            }	
+			else if(GameManager.Instance.AlgoType == AlgoTypes.Greedy)
+			{
+				m_GreedyAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
+				GreedySolver.Instance.Solve(m_GreedyAlgorithm);
+			}
 		}
 	}
 
