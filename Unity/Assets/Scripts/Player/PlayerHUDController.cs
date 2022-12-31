@@ -146,10 +146,16 @@ public class PlayerHUDController : MonoBehaviour
 					var hitObjectGameObject = raycastSceneHit.collider.gameObject;
 
 					var itemPrefabScript = colliderGameObject.GetComponent<ItemPrefab>();
-					m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, new(GetComponentFromParent<ItemProperties>(colliderGameObject.transform)), itemPrefabScript.ObjectAsSprite));
+					var itemPropertiesScript = GetComponentFromParent<ItemProperties>(colliderGameObject.transform);
 
-					var spawnPoint = ItemSpawner.GetSpawnPoint(hitObjectGameObject);
-					ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
+					// Check if our Knapsack has enough Space for the new Item
+					if (Inventory.Instance.GetTotalWeight() + itemPropertiesScript.weight <= m_KnapsackCapacity)
+					{
+						m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, new(itemPropertiesScript), itemPrefabScript.ObjectAsSprite));
+
+						var spawnPoint = ItemSpawner.GetSpawnPoint(hitObjectGameObject);
+						ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
+					}
 				}
 
 				m_IsCollidingWithItem = true;
