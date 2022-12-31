@@ -30,6 +30,9 @@ public class PlayerHUDController : MonoBehaviour
 	private DynamicProgAlgoBehaviour m_DynamicProgrAlgorithm = new();
 	private GreedyAlgoBehaviour m_GreedyAlgorithm = new();
 
+	public GameObject DynamicProgrSolverScreen;
+	public GameObject GreedySolverScreen;
+
 	private void Awake()
 	{
         Instance = this;
@@ -44,6 +47,15 @@ public class PlayerHUDController : MonoBehaviour
 		else
 		{
 			SetKnapsackCapacity(5);
+		}
+
+		if (MainMenuManager.SelectedAlgorithm == AlgoTypes.Dynamic)
+		{
+			DynamicProgrSolverScreen.SetActive(true);
+		}
+		else if (MainMenuManager.SelectedAlgorithm == AlgoTypes.Greedy)
+		{
+			GreedySolverScreen.SetActive(true);
 		}
 
 		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
