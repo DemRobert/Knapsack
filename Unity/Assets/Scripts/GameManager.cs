@@ -1,11 +1,25 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public enum GameModes
+{
+	UNDEFINED,
+	LEARNING,
+	PRACTICE
+}
+
+public enum AlgoTypes
+{
+	Tutorial,
+	Greedy,
+	Dynamic
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public EventSystem EventSystem;
+	public EventSystem EventSystem;
     public GameModes GameMode { get; private set; }
     public AlgoTypes AlgoType { get; set; }
 
@@ -23,17 +37,3 @@ public class GameManager : MonoBehaviour
 
     // Für Commit
 }
-public enum GameModes
-{
-    UNDEFINED,
-    LEARNING,
-    PRACTICE
-}
-
-public enum AlgoTypes
-{
-    Tutorial,
-    Greedy,
-    Dynamic
-}
-

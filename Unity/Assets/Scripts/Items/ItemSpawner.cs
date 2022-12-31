@@ -313,6 +313,11 @@ public class ItemSpawner : MonoBehaviour
         var inventory = m_Player.GetComponent<Inventory>();
         if (inventory.GetItems().Count == 0)
         {
+			if (GameManager.Instance.GameMode == GameModes.PRACTICE)
+            {
+                return;
+            }
+
 			if (s_ActiveAddItemMenu == null)
 			{
 				s_ActiveAddItemMenu = Instantiate(AddItemMenu);

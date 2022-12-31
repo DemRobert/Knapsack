@@ -12,6 +12,7 @@ public class PlayerHUDController : MonoBehaviour
     public TextMeshProUGUI KnapsackCapacityText;
 
 	public GameObject PauseMenu;
+	private bool m_Paused;
 
     private int m_KnapsackCapacity = 0;
     private int m_OldKnapsackCapacity = 0;
@@ -36,14 +37,26 @@ public class PlayerHUDController : MonoBehaviour
 
 	private void Start()
 	{
-		SetKnapsackCapacity(5);
+		if (MainMenuManager.SelectedGameMode == GameModes.PRACTICE)
+		{
+			SetKnapsackCapacity(Mathf.RoundToInt(Random.Range(4.0f, 10.0f)));
+		}
+		else
+		{
+			SetKnapsackCapacity(5);
+		}
 
 		m_PlayerInventory = transform.parent.GetComponent<Inventory>();
 	}
 
+	public void SetPaused(bool paused)
+	{
+		m_Paused = paused;
+	}
+
 	public bool IsPaused()
 	{
-		return PauseMenu.activeInHierarchy;
+		return PauseMenu.activeInHierarchy || m_Paused;
 	}
 
 	private void Update()
@@ -81,7 +94,10 @@ public class PlayerHUDController : MonoBehaviour
 					switch (imageComponent.sprite.name)
 					{
 					case "RemoveItem":
-						ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
+						if (GameManager.Instance.GameMode != GameModes.PRACTICE)
+						{
+							ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
+						}
 
 						break;
 
@@ -198,8 +214,8 @@ public class PlayerHUDController : MonoBehaviour
 				// If a Digit is typed
 				if (curTyped >= 48 && curTyped <= 57)
 				{
-					// At most 3 Digits -> 999 = highest available
-					if (m_CurrentlyTypedString.Length < 3)
+					// At most 3 Digits -> 99 = highest available
+					if (m_CurrentlyTypedString.Length < 2)
 					{
 						m_CurrentlyTypedString += curTyped;
 						SetKnapsackCapacityText(m_CurrentlyTypedString);
@@ -235,17 +251,18 @@ public class PlayerHUDController : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				SetKnapsackCapacity(m_OldKnapsackCapacity);
+
 				anyButtonPressed = true;
 			}
 			else if (Input.GetKeyDown(KeyCode.Return))
 			{
 				if (m_CurrentlyTypedString.Length == 0)
 				{
-					SetKnapsackCapacity(0);
+					SetKnapsackCapacity(m_OldKnapsackCapacity);
 				}
 				else
 				{
-					m_KnapsackCapacity = int.Parse(m_CurrentlyTypedString);
+					SetKnapsackCapacity(Mathf.Min(int.Parse(m_CurrentlyTypedString), 25));
 				}
 
 				anyButtonPressed = true;

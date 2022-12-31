@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class AddItemSelectEventHandler : MonoBehaviour
 {
-    public void OnAddNewItemButtonPressed()
+	public GameObject AddNewItem;
+
+	private void Start()
+	{
+		if (GameManager.Instance.GameMode == GameModes.PRACTICE)
+		{
+			Destroy(AddNewItem);
+		}
+	}
+
+	public void OnAddNewItemButtonPressed()
     {
 		ItemSpawner.Instance.OnAddNewItemButtonPressed();
 	}
@@ -12,5 +22,10 @@ public class AddItemSelectEventHandler : MonoBehaviour
 	public void OnAddInventoryItemButtonPressed()
 	{
 		ItemSpawner.Instance.OnAddInventoryItemButtonPressed();
+	}
+
+	public void OnCancelButtonPressed()
+	{
+		Destroy(gameObject);
 	}
 }
