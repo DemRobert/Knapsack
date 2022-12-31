@@ -265,7 +265,7 @@ public class DynamicProgrammingSolver : MonoBehaviour
 			var curItem = GetItems()[curItemIndex];
 			// If the current Item doesn't fit because its Weight is too big
 			// -> use the Celltext of the Cell above or 0 if it is the first Row (next Step)
-			if (curItem.weight > curCapacity)
+			if (curItem.Weight > curCapacity)
 			{
 				textCellWithoutCurItem.color = m_TextColorHighlightGreen;
 			}
@@ -310,7 +310,7 @@ public class DynamicProgrammingSolver : MonoBehaviour
 			oldTextColors.Add(textCurWeightItemTable, textCurWeightItemTable.color);
 			textCurWeightItemTable.color = m_TextColorHighlightBlue;
 
-			var withCurItemOldCapacity = curCapacity - curItem.weight;
+			var withCurItemOldCapacity = curCapacity - curItem.Weight;
 			TextMeshProUGUI textCellWithCurItem = null;
 			if (withCurItemOldCapacity > 0 && curItemIndex > 0)
 			{
@@ -363,11 +363,11 @@ public class DynamicProgrammingSolver : MonoBehaviour
 				{
 					if (curItemIndex == 0)
 					{
-						DrawItemValue(curItem.value, curCapacity, curItemIndex);
+						DrawItemValue(curItem.Value, curCapacity, curItemIndex);
 					}
 					else
 					{
-						var textCellWithCurItemCol = curCapacity - curItem.weight;
+						var textCellWithCurItemCol = curCapacity - curItem.Weight;
 						var textCellWithCurItemValue = 0;
 
 						if (textCellWithCurItemCol > 0)
@@ -375,7 +375,7 @@ public class DynamicProgrammingSolver : MonoBehaviour
 							textCellWithCurItemValue = int.Parse(GetText(mainTable, textCellWithCurItemCol, curItemIndex).text);
 						}
 
-						DrawItemValue(textCellWithCurItemValue + curItem.value, curCapacity, curItemIndex);
+						DrawItemValue(textCellWithCurItemValue + curItem.Value, curCapacity, curItemIndex);
 					}
 				}
 				else
@@ -398,7 +398,7 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		{
 			var mainTable = GetMainTable();
 			var curItem = GetItems()[curItemIndex];
-			var curWeight = curItem.weight;
+			var curWeight = curItem.Weight;
 
 			var oldTextColors = new Dictionary<TextMeshProUGUI, Color>();
 
@@ -678,8 +678,8 @@ public class DynamicProgrammingSolver : MonoBehaviour
 			var curItem = items[i];
 
 			// From Bottom to Top in Table
-			DrawText(curItem.weight.ToString(), curX, startY, widthCell, heightCell);
-			DrawText(curItem.value.ToString(), curX, startY + heightCell, widthCell, heightCell);
+			DrawText(curItem.Weight.ToString(), curX, startY, widthCell, heightCell);
+			DrawText(curItem.Value.ToString(), curX, startY + heightCell, widthCell, heightCell);
 			DrawText(i.ToString(), curX, startY + heightCell*2, widthCell, heightCell);
 
 			curX += widthCell;
@@ -709,7 +709,7 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		return PlayerHUDController.Instance.GetKnapsackCapacity();
 	}
 
-	private ItemProperties[] GetItems()
+	private ItemPropertiesNoUnity[] GetItems()
 	{
 		return m_Algorithm.Items;
 	}

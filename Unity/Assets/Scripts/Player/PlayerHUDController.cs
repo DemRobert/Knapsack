@@ -146,7 +146,7 @@ public class PlayerHUDController : MonoBehaviour
 					var hitObjectGameObject = raycastSceneHit.collider.gameObject;
 
 					var itemPrefabScript = colliderGameObject.GetComponent<ItemPrefab>();
-					m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, itemPrefabScript.GetComponent<ItemProperties>(), itemPrefabScript.ObjectAsSprite));
+					m_PlayerInventory.AddItem(new HUDItem(itemPrefabScript.Prefab, new(GetComponentFromParent<ItemProperties>(colliderGameObject.transform)), itemPrefabScript.ObjectAsSprite));
 
 					var spawnPoint = ItemSpawner.GetSpawnPoint(hitObjectGameObject);
 					ItemSpawner.Instance.RemoveItem(spawnPoint.Find("Item").GetChild(0).gameObject);
@@ -260,14 +260,14 @@ public class PlayerHUDController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			GameManager.Instance.AlgoType = AlgoTypes.Dynamic;
+			//GameManager.Instance.AlgoType = AlgoTypes.Dynamic;
 
-			if (GameManager.Instance.AlgoType==AlgoTypes.Dynamic)
+			if (GameManager.Instance.AlgoType == AlgoTypes.Dynamic)
 			{
                 m_DynamicProgrAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
 				DynamicProgrammingSolver.Instance.Solve(m_DynamicProgrAlgorithm);
             }	
-			else if(GameManager.Instance.AlgoType == AlgoTypes.Greedy)
+			else if (GameManager.Instance.AlgoType == AlgoTypes.Greedy)
 			{
 				m_GreedyAlgorithm.StartAlgorithm(ItemSpawner.Instance.GetItemProperties(), GetKnapsackCapacity(), out var selectedItems, out var steps, out int totalValue, out var totalWeight);
 				GreedySolver.Instance.Solve(m_GreedyAlgorithm);

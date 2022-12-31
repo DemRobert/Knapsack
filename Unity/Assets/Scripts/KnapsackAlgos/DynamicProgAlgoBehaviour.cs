@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class DynamicProgAlgoBehaviour : AlgoBehaviour
 {
-    public ItemProperties[] Items;
-    public ItemProperties[] SelectedItems;
+    public ItemPropertiesNoUnity[] Items;
+    public ItemPropertiesNoUnity[] SelectedItems;
 
     public override void StartAlgorithm(object[] items, int maxWeight, out object[] selectedItems, out AlgoStep[] steps, out int selectedItemsTotalValue, out int selectedItemsTotalWeight)
     {
-		Items = (ItemProperties[])items;
+		Items = (ItemPropertiesNoUnity[])items;
 
         var matrix = new int[items.Length+1][];
         for (var i = 0; i < matrix.Length; ++i)
@@ -31,16 +31,16 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
 				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.NEW_CELL, null, curCapacity, itemIndex-1);
 				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT01, null, curCapacity, itemIndex-1);
 
-                var isItemOk = curItem.weight <= curCapacity;
+                var isItemOk = curItem.Weight <= curCapacity;
 				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT02, isItemOk, curCapacity, itemIndex-1);
 
-                var withCurItemOldCapacity = curCapacity - curItem.weight;
+                var withCurItemOldCapacity = curCapacity - curItem.Weight;
 				CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.COMPARE_WEIGHT03, withCurItemOldCapacity, curCapacity, itemIndex-1);
 
 				if (isItemOk)
                 {
                     var valueWithoutCurItem = matrix[itemIndex-1][curCapacity];
-                    var valueWithCurItem = matrix[itemIndex-1][withCurItemOldCapacity] + curItem.value;
+                    var valueWithCurItem = matrix[itemIndex-1][withCurItemOldCapacity] + curItem.Value;
 
                     var isBetterWithCurItem = valueWithCurItem > valueWithoutCurItem;
 					CreateAlgoStep(DynamicProgAlgoStep.DynamicAlgoOperations.HIGHLIGHT_BEST_OPTION, isBetterWithCurItem, curCapacity, itemIndex-1);
@@ -75,7 +75,7 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
         var selectedItemsCapacity = maxWeight;
         var selectedItemsValue = selectedItemsTotalValue;
 
-		var selectedItemsList = new List<ItemProperties>();
+		var selectedItemsList = new List<ItemPropertiesNoUnity>();
 		for (var i = items.Length; i > 0 && selectedItemsValue > 0; --i)
         {
             if (selectedItemsValue == matrix[i-1][selectedItemsCapacity])
@@ -86,14 +86,14 @@ public class DynamicProgAlgoBehaviour : AlgoBehaviour
             var curItem = Items[i-1];
 
 			selectedItemsList.Add(curItem);
-            selectedItemsCapacity -= curItem.weight;
-            selectedItemsValue -= curItem.value;
+            selectedItemsCapacity -= curItem.Weight;
+            selectedItemsValue -= curItem.Value;
 		}
 
         selectedItemsTotalWeight = 0;
 		foreach (var item in selectedItemsList)
         {
-            selectedItemsTotalWeight += item.weight;
+            selectedItemsTotalWeight += item.Weight;
 		}
 
 		SelectedItems = selectedItemsList.ToArray();

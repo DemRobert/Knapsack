@@ -66,26 +66,39 @@ public class ItemSpawner : MonoBehaviour
         SpawnSigns();
     }
 
-    public ItemProperties[] GetItemProperties()
+    public ItemPropertiesNoUnity[] GetItemProperties()
     {
-		var result = new ItemProperties[m_Items.Count];
-		for (var i = 0; i < result.Length; ++i)
+        // Merge Items that are in the Scene and in the Inventory of the Player together
+        var itemsInInventory = Inventory.Instance.GetItems();
+		var result = new List<ItemPropertiesNoUnity>(m_Items.Count + itemsInInventory.Count);
+
+        foreach (var item in m_Items)
+        {
+            var curPropsToAdd = PlayerHUDController.GetComponentFromParent<ItemProperties>(item.transform);
+            if (curPropsToAdd == null)
+            {
+                Debug.Log("ERROR (GetItemProperties()): curPropsToAdd of m_Items is null");
+
+                continue;
+            }
+
+			result.Add(new(curPropsToAdd));
+        }
+
+		foreach (var item in itemsInInventory)
 		{
-			var curItemPropsComp = PlayerHUDController.GetComponentFromParent<ItemProperties>(m_Items[i].transform);
-
-			if (curItemPropsComp != null)
+			var curPropsToAdd = item.ItemProperties;
+			if (curPropsToAdd == null)
 			{
-				result[i] = curItemPropsComp;
-			}
-			else
-			{
-				Debug.Log("Couldn't Test Dynamic Progr Alg. because unable to obtain the Item Properties Components.");
+				Debug.Log("ERROR (GetItemProperties()): curPropsToAdd of itemsInInventory is null");
 
-				return null;
+				continue;
 			}
+
+			result.Add(curPropsToAdd);
 		}
 
-        return result;
+        return result.ToArray();
 	}
 
     private void CollectSpawnPoints()
@@ -337,7 +350,7 @@ public class ItemSpawner : MonoBehaviour
 
     public void OnHUDItemSelected(HUDItem hudItem)
     {
-        SpawnItem(s_CurrentAddItemMenuSpawnPoint.gameObject, hudItem.ItemProperties.value, hudItem.ItemProperties.weight, hudItem.Prefab);
+        SpawnItem(s_CurrentAddItemMenuSpawnPoint.gameObject, hudItem.ItemProperties.Value, hudItem.ItemProperties.Weight, hudItem.Prefab);
         SpawnSign(s_CurrentAddItemMenuSpawnPoint.gameObject);
 
         var inventory = m_Player.GetComponent<Inventory>();

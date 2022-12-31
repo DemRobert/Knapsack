@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance;
+
     private readonly List<HUDItem> m_Items = new();
     private int m_TotalWeight = 0;
     private int m_TotalValue = 0;
@@ -18,6 +20,11 @@ public class Inventory : MonoBehaviour
     public bool Maximized = false;
     private float m_MaximizedInventoryScale = 2.0f;
     private Vector2 m_ItemInHUDPrefabImageSize;
+
+	private void Awake()
+	{
+        Instance = this;
+	}
 
 	private void Start()
 	{
@@ -45,8 +52,8 @@ public class Inventory : MonoBehaviour
         m_Items.Add(item);
 
         var itemProperties = item.ItemProperties;
-        m_TotalWeight += itemProperties.weight;
-        m_TotalValue += itemProperties.value;
+        m_TotalWeight += itemProperties.Weight;
+        m_TotalValue += itemProperties.Value;
 
 		ClearInventory();
 		ShowItemsOnScreen();
@@ -57,8 +64,8 @@ public class Inventory : MonoBehaviour
         m_Items.Remove(item);
 
 		var itemProperties = item.ItemProperties;
-		m_TotalWeight -= itemProperties.weight;
-		m_TotalValue -= itemProperties.value;
+		m_TotalWeight -= itemProperties.Weight;
+		m_TotalValue -= itemProperties.Value;
 
         ClearInventory();
         ShowItemsOnScreen();
@@ -100,8 +107,8 @@ public class Inventory : MonoBehaviour
 			}
 
 			var curItem = m_Items[i];
-            curItemTextWeight.text = curItem.ItemProperties.weight.ToString();
-			curItemTextValue.text = curItem.ItemProperties.value.ToString();
+            curItemTextWeight.text = curItem.ItemProperties.Weight.ToString();
+			curItemTextValue.text = curItem.ItemProperties.Value.ToString();
 
             var itemImage = curHUDItem.transform.Find("ItemImage").GetComponent<Image>();
             itemImage.sprite = curItem.ItemSprite;

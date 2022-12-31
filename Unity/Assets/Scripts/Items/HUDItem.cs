@@ -3,10 +3,10 @@ using UnityEngine;
 public class HUDItem
 {
     public GameObject Prefab;
-    public ItemProperties ItemProperties;
+    public ItemPropertiesNoUnity ItemProperties;
     public Sprite ItemSprite;
 
-    public HUDItem(GameObject prefab, ItemProperties itemProperties, Sprite itemSprite)
+    public HUDItem(GameObject prefab, ItemPropertiesNoUnity itemProperties, Sprite itemSprite)
     {
         Prefab = prefab;
 		ItemProperties = itemProperties;
