@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7343af5abbcac74f93028ef1ef0a79d, type: 2}
   - {fileID: 11400000, guid: ebf4a41968371fb438d484af323e4ad1, type: 2}
   ConsiderPrioritySpawnPoints: 0
-  CountOfItemsToSpawn: 2
+  CountOfItemsToSpawn: 6
   SpawnPoints:
   - {fileID: 0}
   PrioritySpawnPoints: []

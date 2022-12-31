@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sprite
   Model: {fileID: 4452355768698030123, guid: 5fe51b936da02b24b956549a67eddd05, type: 3}
-  Value: 4
+  Value: 3
   Weight: 3

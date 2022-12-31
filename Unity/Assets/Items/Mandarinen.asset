@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mandarinen
   Model: {fileID: 8280634528992227948, guid: 802639403efdbc041b075f7a3a464389, type: 3}
-  Value: 6
-  Weight: 6
+  Value: 5
+  Weight: 5
