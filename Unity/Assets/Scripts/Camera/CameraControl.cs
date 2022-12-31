@@ -13,10 +13,11 @@ public class CameraControl : MonoBehaviour
 
 	private Vector2 m_CameraAngles = new();
 	public float FocusLength = 4.0f;
+	//private float m_SnapHalfAngle = 44.0f;
 
 	private void Start()
 	{
-		m_CameraAngles.x = 180.0f;
+		m_CameraAngles.x = -_player.transform.rotation.eulerAngles.y;
 	}
 
 	private void Update()
@@ -43,6 +44,31 @@ public class CameraControl : MonoBehaviour
 			m_CameraAngles.y += Input.GetAxis("Mouse Y");
 			m_CameraAngles.y = Mathf.Clamp(m_CameraAngles.y, -10.0f, 10.0f);
 		}
+
+		/*if (Input.GetMouseButtonDown(2))
+		{
+			if (m_CameraAngles.x < 0.0f)
+			{
+				m_CameraAngles.x += 360.0f;
+			}
+			
+			for (var side = 0.0f; side <= 271.0f; side += 90.0f)
+			{
+				var angleBorderLeft = side - m_SnapHalfAngle;
+				if (angleBorderLeft < 0.0f)
+				{
+					angleBorderLeft = 360.0f - m_SnapHalfAngle;
+				}
+
+				var angleBorderRight = side + m_SnapHalfAngle;
+				if (m_CameraAngles.x >= angleBorderLeft && m_CameraAngles.x <= angleBorderRight)
+				{
+					m_CameraAngles.x = side;
+
+					break;
+				}
+			}
+		}*/
 
 		var playerPos = _player.transform.position;
 		var ourNewPos = playerPos;

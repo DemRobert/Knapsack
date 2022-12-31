@@ -212,7 +212,20 @@ public class ItemSpawner : MonoBehaviour
 	private void SpawnItem(GameObject spawnPoint)
 	{
 		var randomItemTemplate = GetRandomItem();
-		SpawnItem(spawnPoint, randomItemTemplate.Value, randomItemTemplate.Weight, randomItemTemplate.Model);
+
+        var value = randomItemTemplate.Value;
+        var weight = randomItemTemplate.Weight;
+        
+        if (MainMenuManager.SelectedGameMode == GameModes.PRACTICE)
+        {
+            value = Random.Range(Mathf.Max(1, randomItemTemplate.Value-2), randomItemTemplate.Value+2);
+		    weight = Random.Range(0.0f, 1.0f) >= 0.5f ? randomItemTemplate.Weight : randomItemTemplate.Weight-1;
+		}
+
+		value = Mathf.Max(1, value);
+        weight = Mathf.Max(1, weight);
+
+		SpawnItem(spawnPoint, value, weight, randomItemTemplate.Model);
 	}
 
 	private void SpawnItem(GameObject spawnPoint, int value, int weight)

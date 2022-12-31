@@ -69,6 +69,11 @@ public class DynamicProgrammingSolver : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.H))
 		{
 			SolvingDone();
+
+			m_Autoplay = false;
+			m_StepExecutionCounter = 0.0f;
+
+			return;
 		}
 
 		if (Input.GetKeyDown(KeyCode.K))
